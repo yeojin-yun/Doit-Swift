@@ -17,15 +17,15 @@
 <img width="359" alt="스크린샷 2021-12-12 오후 11 31 56" src="https://user-images.githubusercontent.com/85544383/145716791-aa5d23b3-0afc-4880-99e5-c9c66913f02d.png">  
 
 ## Image View
-```
-ImageViewViewController)
+```swift
+ImageViewViewController.swift
 ```
 ![Simulator Screen Recording - iPhone 11 Pro - 2021-12-12 at 23 33 39](https://user-images.githubusercontent.com/85544383/145717019-0310bf12-5f96-4694-96c0-2a540a3bb532.gif)
 
 
 ## Image View Mission
-```
-ImageMissionViewController)
+```swift
+ImageMissionViewController.swift
 ```
 ![Simulator Screen Recording - iPhone 11 Pro - 2021-12-12 at 23 34 00](https://user-images.githubusercontent.com/85544383/145717028-0d6f6e3a-8227-4754-803d-3601abbb8daf.gif)
 
