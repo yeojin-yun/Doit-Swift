@@ -8,7 +8,8 @@
 <img width="354" alt="스크린샷 2021-12-12 오후 11 31 13" src="https://user-images.githubusercontent.com/85544383/145716841-2cc9906d-fdc7-4a63-9aa7-6c36c655a2a2.png">  
 
 #### Hello World (FirstViewController)  
-![HelloWorld](https://user-images.githubusercontent.com/85544383/145717007-f03530c9-8065-4bab-89ff-b57b82e98e8a.gif)
+![Simulator Screen Recording - iPhone 11 Pro - 2021-12-12 at 23 45 54](https://user-images.githubusercontent.com/85544383/145717073-9b6f0ada-a3a5-4ddb-8ec9-f6b996a0decf.gif)
+
 
 
 
