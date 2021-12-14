@@ -33,5 +33,6 @@ ImageMissionViewController.swift
 ```swift
 DatePickerViewController
 ```
-![datePciker구현](https://github.com/yeojin-yun/Doit-Swift/blob/main/Simulator%20Screen%20Recording%20-%20iPhone%2011%20Pro%20-%202021-12-14%20at%2021.44.56.gif)
+![datePciker구현]
+/Users/yeojin-yun/Desktop/Simulator Screen Recording - iPhone 11 Pro - 2021-12-14 at 21.44.56.gif
 
