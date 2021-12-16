@@ -64,6 +64,7 @@ extension ImageViewViewController {
         ])
         
     }
+    
     @objc func btnTapped(_ sender: UIButton) {
         let scale:CGFloat = 2.0
         var newHeight: CGFloat, newWidth: CGFloat
