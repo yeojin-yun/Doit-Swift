@@ -13,18 +13,18 @@ class PickerViewViewController: UIViewController {
     let mainLbl = UILabel()
     let titleLbl = UILabel()
     let selectedImgView = UIImageView()
-    //let imgArray: [UIImage] = []
     
+    //이미지 이름들의 배열
+    let img: [String] = {
+        return (1...10).compactMap { "PickerView\($0)" }
+    }()
     
-    let img = ["PickerView1", "PickerView2", "PickerView3", "PickerView4", "PickerView5", "PickerView6", "PickerView7", "PickerView8", "PickerView9", "PickerView10"]
-    
-    var images: [UIImage] = {
+    //이미지의 배열
+    let images: [UIImage] = {
         return (1...10).compactMap { UIImage(named: "PickerView\($0)") }
     }()
     
-//    var images: [String] = {
-//        return (1...10).compactMap { "PickerView\($0)" }
-//    }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,15 +40,18 @@ extension PickerViewViewController {
     final private func configureUI() {
         setAttributes()
         setConstraints()
+        pickerViewDelegate()
     }
     
-    
-    final private func setAttributes() {
+    final private func pickerViewDelegate() {
         pickView.delegate = self
         pickView.dataSource = self
+    }
+    
+    final private func setAttributes() {
         mainLbl.text = "Selectd Item"
         mainLbl.backgroundColor = .black
-        mainLbl.layer.cornerRadius = 20
+        mainLbl.layer.cornerRadius = 50 //왜 적용 안되지?
         mainLbl.textColor = .white
         titleLbl.text = "PickerView1"
         selectedImgView.image = UIImage(named: "PickerView1")
