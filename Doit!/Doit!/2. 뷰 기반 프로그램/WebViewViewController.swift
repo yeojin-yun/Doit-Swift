@@ -55,9 +55,17 @@ class WebViewViewController: UIViewController, WKNavigationDelegate {
 }
 //MARK: -function
 extension WebViewViewController {
-    @objc func goBtnTapped(_ sender: UIButton) {
-        
+    @objc func htmlBtnTapped(_ sender: UIButton) {
+        let htmlString = "<h1> HTML Stirng </h1><p> String 변수를 이용한 웹 페이지 </p><p><a href=\"http://www.aifacta.co.kr\">아이파경영아카데미</a>로 이동</p>"
+        webView.loadHTMLString(htmlString, baseURL: nil)
     
+    }
+    
+    @objc func fileBtnTapped(_ sender: UIButton) {
+        let filePath = Bundle.main.path(forResource: "htmlView", ofType: "html")
+        let myUrl = URL(fileURLWithPath: filePath!)
+        let myRequest = URLRequest(url: myUrl)
+        webView.load(myRequest)
     }
     
     @objc func site1Tapped(_ sender: UIButton) {
@@ -83,6 +91,21 @@ extension WebViewViewController {
     @objc func forwardBtnTapped(_ sender: UIBarButtonItem) {
         webView.goForward()
         print(#function)
+    }
+    
+    func checkURL(_ url: String) -> String {
+        var strUrl = url
+        let flag = strUrl.hasPrefix("http://")
+        if !flag {
+            strUrl = "http://" + strUrl
+        }
+        return strUrl
+    }
+    
+    @objc func goBtnTapped(_ sender: UIButton) {
+        let myUrl = checkURL(textField.text!)
+        textField.text = ""
+        loadWebPage(myUrl)
     }
 }
 
@@ -128,6 +151,8 @@ extension WebViewViewController {
         goBtn.addTarget(self, action: #selector(goBtnTapped(_:)), for: .touchUpInside)
         siteBtn1.addTarget(self, action: #selector(site1Tapped(_:)), for: .touchUpInside)
         siteBtn2.addTarget(self, action: #selector(site2Tapped(_:)), for: .touchUpInside)
+        htmlBtn.addTarget(self, action: #selector(htmlBtnTapped(_:)), for: .touchUpInside)
+        fileBtn.addTarget(self, action: #selector(fileBtnTapped(_:)), for: .touchUpInside)
         
     }
     final private func setConstraints() {

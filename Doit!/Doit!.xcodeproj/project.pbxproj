@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C41AA022770C6C5005D7274 /* htmlView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C41AA012770C6C5005D7274 /* htmlView.html */; };
 		0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29632765C4AD0093B45E /* AppDelegate.swift */; };
 		0CEF29662765C4AD0093B45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29652765C4AD0093B45E /* SceneDelegate.swift */; };
 		0CEF29682765C4AD0093B45E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29672765C4AD0093B45E /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C41AA012770C6C5005D7274 /* htmlView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = htmlView.html; sourceTree = "<group>"; };
 		0CEF29602765C4AD0093B45E /* Doit!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doit!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEF29632765C4AD0093B45E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CEF29652765C4AD0093B45E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 				0CEF29812765CD370093B45E /* PickerViewViewController.swift */,
 				0CEF29832765CD3C0093B45E /* AlertViewController.swift */,
 				0CEF29852765CD4D0093B45E /* WebViewViewController.swift */,
+				0C41AA012770C6C5005D7274 /* htmlView.html */,
 				0CEF29872765CD530093B45E /* MapViewViewController.swift */,
 			);
 			name = "2. 뷰 기반 프로그램";
@@ -229,6 +232,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C41AA022770C6C5005D7274 /* htmlView.html in Resources */,
 				0CEF29702765C4AE0093B45E /* LaunchScreen.storyboard in Resources */,
 				0CEF296D2765C4AE0093B45E /* Assets.xcassets in Resources */,
 				0CEF296B2765C4AD0093B45E /* Main.storyboard in Resources */,
