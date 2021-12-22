@@ -62,9 +62,9 @@ extension ChapterViewController {
         switch self.navigationItem.title {
         case "1. Hello! 아이폰 앱":
             selectedList = firstList
-        case "2. 뷰 기반 프로그램 직접 만들기":
+        case "2. 뷰 기반":
             selectedList = secondList
-        case "3. 뷰 컨트롤러 기반 프로그램 만들기":
+        case "3. 뷰 컨트롤러 기반":
             selectedList = thirdList
         case "4. 멀티미디어 활용하기":
             selectedList = forthList
@@ -90,24 +90,24 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
         cell.textLabel?.font = UIFont.systemFont(ofSize: 20)
         cell.accessoryType = .disclosureIndicator
         
-        switch indexPath.row {
-        case 0:
-            cell.backgroundColor = .red
-        case 1:
-            cell.backgroundColor = .orange
-        case 2:
-            cell.backgroundColor = .yellow
-        case 3:
-            cell.backgroundColor = .green
-        case 4:
-            cell.backgroundColor = .blue
-        case 5:
-            cell.backgroundColor = .brown
-        case 6:
-            cell.backgroundColor = .purple
-        default:
-            break
-        }
+//        switch indexPath.row {
+//        case 0:
+//            cell.backgroundColor = .red
+//        case 1:
+//            cell.backgroundColor = .orange
+//        case 2:
+//            cell.backgroundColor = .yellow
+//        case 3:
+//            cell.backgroundColor = .green
+//        case 4:
+//            cell.backgroundColor = .blue
+//        case 5:
+//            cell.backgroundColor = .brown
+//        case 6:
+//            cell.backgroundColor = .purple
+//        default:
+//            break
+//        }
         return cell
     }
     
@@ -118,54 +118,65 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
         case "1. Hello! 아이폰 앱":
             let nextVC = FirstViewController()
             nextVC.navigationItem.title = selectedList[indexPath.row]
+            navigationController?.navigationBar.prefersLargeTitles = true
             navigationController?.pushViewController(nextVC, animated: true)
-        case "2. 뷰 기반 프로그램 직접 만들기":
+        case "2. 뷰 기반":
             switch indexPath.row {//self.navigationItem.title {
             case 0://"ImageView":
                 let nextVC = ImageViewViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 1://"Date Picker":
                 let nextVC = DatePickerViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 2://"Pick View":
                 let nextVC = PickerViewViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 3://"Alert":
                 let nextVC = AlertViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 4://"Web View":
                 let nextVC = WebViewViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 5://"Map View":
                 let nextVC = MapViewViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             default:
                 break
             }
 
-        case "3. 뷰 컨트롤러 기반 프로그램 만들기":
+        case "3. 뷰 컨트롤러 기반":
             switch indexPath.row {
             case 0:
                 let nextVC = PageControlViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 1:
                 let nextVC = TabBarViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 2:
                 let nextVC = NavigationViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 3:
                 let nextVC = TableViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             default:
                 break
@@ -175,18 +186,22 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let nextVC = MusicViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 1:
                 let nextVC = VideoViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 2:
                 let nextVC = CameraViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 3:
                 let nextVC = CoreGraphicsViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             default:
                 break
@@ -196,14 +211,17 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let nextVC = TabTouchViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 1:
                 let nextVC = SwipeGestureViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 2:
                 let nextVC = PinchGestureViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
+                navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             default:
                 break
@@ -211,5 +229,9 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
+       
+        
     }
+    
+
 }

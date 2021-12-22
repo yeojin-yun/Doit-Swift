@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    let list = ["1. Hello! 아이폰 앱", "2. 뷰 기반 프로그램 직접 만들기", "3. 뷰 컨트롤러 기반 프로그램 만들기", "4. 멀티미디어 활용하기", "5. 이벤트와 제스쳐"]
+    let list = ["1. Hello! 아이폰 앱", "2. 뷰 기반", "3. 뷰 컨트롤러 기반", "4. 멀티미디어 활용하기", "5. 이벤트와 제스쳐"]
 
 
     
@@ -27,6 +27,7 @@ class ViewController: UIViewController {
         setBasics()
         view.backgroundColor = .white
         self.navigationItem.title = "Do it! 아이폰 앱 만들기"
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     
@@ -73,6 +74,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let nextVC = ChapterViewController()
         nextVC.navigationItem.title = list[indexPath.row]
+        
+
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.pushViewController(nextVC, animated: true)
     }
     
