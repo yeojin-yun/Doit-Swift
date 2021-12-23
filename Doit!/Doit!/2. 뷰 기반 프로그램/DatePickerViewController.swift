@@ -23,7 +23,7 @@ class DatePickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(red: 0.0 / 255.0, green: 201.0 / 255.0, blue: 167.0 / 255.0, alpha: 1.0)
         setUI()
         //타이머 작업을 위한 셋팅
         Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(upDateTime), userInfo: nil, repeats: true)
@@ -100,13 +100,13 @@ extension DatePickerViewController {
         
         //(미션) 알람 시간과 현재 시간이 같아지면 배경을 빨간색으로 바꾸기
         if alarmTime == currentTime {
-            view.backgroundColor = .red
+            view.backgroundColor = UIColor(red: 0.0 / 255.0, green: 201.0 / 255.0, blue: 167.0 / 255.0, alpha: 1.0)
             let alert = UIAlertController(title: "알림🛎", message: "설정한 시간입니다.⏰", preferredStyle: .alert)
             let okAction = UIAlertAction(title: "알겠다구요.", style: .default, handler: nil)
             alert.addAction(okAction)
             present(alert, animated: true, completion: nil)
         } else {
-            view.backgroundColor = .white
+            view.backgroundColor = UIColor(red: 0.0 / 255.0, green: 201.0 / 255.0, blue: 167.0 / 255.0, alpha: 1.0)
         }
         
     }

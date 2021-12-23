@@ -17,7 +17,7 @@ class PageControlViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-        
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "미션", style: .plain, target: self, action: #selector(rightBarBtnTapped(_:)))
     }
     
 
@@ -27,6 +27,13 @@ class PageControlViewController: UIViewController {
 extension PageControlViewController {
     @objc func pageControllerTapped(_ sender: UIPageControl) {
         imgVeiw.image = UIImage(named: images[pageControl.currentPage])
+    }
+    
+    @objc func rightBarBtnTapped(_ sender: UIBarButtonItem) {
+        let nextVC = MissionPageControlViewController()
+        nextVC.navigationItem.title = "PageControl Mission"
+        navigationController?.pushViewController(nextVC, animated: true)
+        
     }
 }
 

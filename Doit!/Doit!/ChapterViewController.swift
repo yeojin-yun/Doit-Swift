@@ -161,13 +161,28 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let nextVC = PageControlViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
-                navigationController?.navigationBar.prefersLargeTitles = true
+                //navigationController?.navigationBar.prefersLargeTitles = true
                 navigationController?.pushViewController(nextVC, animated: true)
             case 1:
+                let tabBar = UITabBarController()
                 let nextVC = TabBarViewController()
+                //let nav1 = UINavigationController(rootViewController: nextVC)
+                let nextVC1 = ImageViewViewController()
+                let nextVC2 = DatePickerViewController()
+                
+                let tabBarItem1 = UITabBarItem(title: "Top Rated", image: UIImage(systemName: "star.fill"), selectedImage: nil)
+                let tabBarItem2 = UITabBarItem(title: "imgView", image: UIImage(systemName: "photo"), selectedImage: nil)
+                let tabBarItem3 = UITabBarItem(title: "DatePicker", image: UIImage(systemName: "clock"), selectedImage: nil)
+                
+                nextVC.tabBarItem = tabBarItem1
+                nextVC1.tabBarItem = tabBarItem2
+                nextVC2.tabBarItem = tabBarItem3
+                
+                tabBar.setViewControllers([nextVC, nextVC1, nextVC2], animated: true)
+                
                 nextVC.navigationItem.title = selectedList[indexPath.row]
-                navigationController?.navigationBar.prefersLargeTitles = true
-                navigationController?.pushViewController(nextVC, animated: true)
+                //navigationController?.navigationBar.prefersLargeTitles = true
+                navigationController?.pushViewController(tabBar, animated: true)
             case 2:
                 let nextVC = NavigationViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]

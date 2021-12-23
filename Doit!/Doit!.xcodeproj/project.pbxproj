@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0C41AA022770C6C5005D7274 /* htmlView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C41AA012770C6C5005D7274 /* htmlView.html */; };
+		0C41AA042772B86C005D7274 /* MissionPageControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */; };
 		0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29632765C4AD0093B45E /* AppDelegate.swift */; };
 		0CEF29662765C4AD0093B45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29652765C4AD0093B45E /* SceneDelegate.swift */; };
 		0CEF29682765C4AD0093B45E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29672765C4AD0093B45E /* ViewController.swift */; };
@@ -38,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		0C41AA012770C6C5005D7274 /* htmlView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = htmlView.html; sourceTree = "<group>"; };
+		0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionPageControlViewController.swift; sourceTree = "<group>"; };
 		0CEF29602765C4AD0093B45E /* Doit!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doit!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEF29632765C4AD0093B45E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CEF29652765C4AD0093B45E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,6 +146,7 @@
 			isa = PBXGroup;
 			children = (
 				0CEF29892765CD600093B45E /* PageControlViewController.swift */,
+				0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */,
 				0CEF298B2765CD680093B45E /* TabBarViewController.swift */,
 				0CEF298D2765CD6D0093B45E /* NavigationViewController.swift */,
 				0CEF298F2765CD740093B45E /* TableViewController.swift */,
@@ -246,6 +249,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C41AA042772B86C005D7274 /* MissionPageControlViewController.swift in Sources */,
 				0CEF29862765CD4D0093B45E /* WebViewViewController.swift in Sources */,
 				0CEF297C2765CC0C0093B45E /* FirstViewController.swift in Sources */,
 				0CEF29822765CD370093B45E /* PickerViewViewController.swift in Sources */,

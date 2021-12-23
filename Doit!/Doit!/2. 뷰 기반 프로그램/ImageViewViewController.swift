@@ -19,7 +19,7 @@ class ImageViewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(red: 175.0 / 255.0, green: 156.0 / 255.0, blue: 208.0 / 255.0, alpha: 1.0)
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "미션", style: .plain, target: self, action: #selector(rightBarButton(_:)))
         setUI()
     }
