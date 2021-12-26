@@ -1,14 +1,14 @@
 //
-//  MusicViewController.swift
+//  RecorderViewController.swift
 //  Doit!
 //
-//  Created by 순진이 on 2021/12/12.
+//  Created by 순진이 on 2021/12/26.
 //
 
 import UIKit
 import AVFoundation
 
-class MusicViewController: UIViewController {
+class RecorderViewController: UIViewController {
 
     let mainLbl = UILabel()
     let progressBar = UIProgressView()
@@ -39,39 +39,32 @@ class MusicViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "녹음", style: .plain, target: self, action: #selector(rightBtnTapped(_:)))
         configureUI()
         selectAudioFile()
         if !isRecordMode {
-            initPlay()
             recordBtn.isEnabled = false
             recordTime.isEnabled = false
         } else {
             initRecord()
         }
     }
-    
-    @objc func rightBtnTapped(_ sender: UIButton) {
-        let nextVC = RecorderViewController()
-        self.navigationController?.pushViewController(nextVC, animated: true)
-    }
 }
 
 //MARK: -Event
-extension MusicViewController {
+extension RecorderViewController {
     @objc func audioBtnTapped(_ sender: UIButton) {
         switch sender.currentTitle {
         case "Play":
-            audioPlayer.play()
+            //audioPlayer.play()
             setPlayBtnSetting(play: false, pause: true, stop: true)
-            progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+            progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateRecordTime), userInfo: nil, repeats: true)
         case "Pause":
-            audioPlayer.pause()
+            //audioPlayer.pause()
             setPlayBtnSetting(play: true, pause: false, stop: true)
         case "Stop":
-            audioPlayer.stop()
+            //audioPlayer.stop()
             // 정지하면 처음부터 재생해야 하므로, currentTime도 다시 초기값 0으로 셋팅 & 레이블 표시도 0으로 셋팅
-            audioPlayer.currentTime = 0
+            //audioPlayer.currentTime = 0
             currentLbl.text = convertNSTimerIntervalToString(0)
             setPlayBtnSetting(play: true, pause: true, stop: false)
             // 타이머도 멈추어야 함
@@ -81,19 +74,19 @@ extension MusicViewController {
         }
     }
     
-    @objc func updateTime() {
-        currentLbl.text = convertNSTimerIntervalToString(audioPlayer.currentTime)
-        progressBar.progress = Float(audioPlayer.currentTime / audioPlayer.duration)
-    }
-    
+//    @objc func updateTime() {
+//        currentLbl.text = convertNSTimerIntervalToString(audioPlayer.currentTime)
+//        progressBar.progress = Float(audioPlayer.currentTime / audioPlayer.duration)
+//    }
+//
     @objc func sliderTapped(_ sender: UISlider) {
         audioPlayer.volume = volumeSlider.value
     }
     
     @objc func switchTapeed(_ sender: UISwitch) {
         if sender.isOn { // 녹음모드일 때 -> 모든 재생 모드는 false가 되도록
-            audioPlayer.stop()
-            audioPlayer.currentTime = 0
+            //audioPlayer.stop()
+            //audioPlayer.currentTime = 0
             recordTime.text = convertNSTimerIntervalToString(0)
             isRecordMode = true
             recordBtn.isEnabled = true
@@ -104,11 +97,7 @@ extension MusicViewController {
             recordTime.isEnabled = false
         }
         selectAudioFile()
-        if !isRecordMode {
-            initPlay()
-        } else {
-            initRecord()
-        }
+        initRecord()
     }
     
     @objc func recordBtnTapped(_ sender: UIButton) {
@@ -122,7 +111,7 @@ extension MusicViewController {
             audioRecorder.stop()
             (sender as AnyObject).setTitle("Record", for: UIControl.State())
             playBtn.isEnabled = true
-            initPlay()
+            
         }
     }
     
@@ -132,7 +121,7 @@ extension MusicViewController {
 }
 
 //MARK: -Delegate
-extension MusicViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
+extension RecorderViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
     // 📻 녹음 초기 셋팅
     func initRecord() {
@@ -150,7 +139,7 @@ extension MusicViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
         }
         audioRecorder.delegate = self
         volumeSlider.value = 1.0
-        audioPlayer.volume = volumeSlider.value
+        //audioPlayer.volume = volumeSlider.value
         endTimeLbl.text = convertNSTimerIntervalToString(0)
         setPlayBtnSetting(play: false, pause: false, stop: false)
         
@@ -168,27 +157,7 @@ extension MusicViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
         }
     }
     
-    func initPlay() {
     
-        do {
-            audioPlayer = try AVAudioPlayer(contentsOf: audioFile)
-        } catch let error as NSError {
-            print("Error-initPlay: \(error)")
-        }
-        
-        volumeSlider.maximumValue = maxVolume // 슬라이더의 최대값 초기화
-        volumeSlider.value = 1.0 // 볼륨을 1로 초기화
-        progressBar.progress = 0.0 // ProgressBar의 초기값 0.0 설정
-        audioPlayer.delegate = self
-        audioPlayer.prepareToPlay()
-        audioPlayer.volume = volumeSlider.value
-        // 시작 시간 (00:00) 셋팅
-        currentLbl.text = convertNSTimerIntervalToString(0)
-        // 끝나는 시간 셋팅
-        endTimeLbl.text = convertNSTimerIntervalToString(audioPlayer.duration)
-        // 처음 시작할 때는 플레이 버튼만 누를 수 있고, 나머지 버튼은 비활성화 해야 함
-        setPlayBtnSetting(play: true, pause: false, stop: false)
-    }
     func convertNSTimerIntervalToString(_ time: TimeInterval) -> String {
         // time을 파라미터로 받아 재생 시간의 '분' 계산하여 정수로 저장
         let min = Int(time / 60)
@@ -209,25 +178,21 @@ extension MusicViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
     // 📻 녹음파일과 재생 파일이 안 겹치게 하기 (녹음모드 아닐 때만 url생성)
     func selectAudioFile() {
-        if !isRecordMode { // 재생 모드일 때
-            audioFile = Bundle.main.url(forResource: "Sicilian_Breeze", withExtension: "mp3")
-        } else { // 녹음 모드일 때는 새 파일인 "recordFile.m4a"가 생성됨
-            let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-            audioFile = documentDirectory.appendingPathComponent("recordFile.m4a")
-        }
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        audioFile = documentDirectory.appendingPathComponent("recordFile.m4a")
     }
     
 }
 
 
 //MARK: -UI
-extension MusicViewController {
+extension RecorderViewController {
     final private func configureUI() {
         setAttributes()
         setConstraints()
     }
     final private func setAttributes() {
-        mainLbl.text = "Audio Player"
+        mainLbl.text = "Recorder Player"
         mainLbl.font = UIFont.boldSystemFont(ofSize: 23)
         //progressBar.progress = 0.0
         //currentLbl.text = "currenTime"
@@ -249,7 +214,7 @@ extension MusicViewController {
         [playBtn, pauseBtn, stopBtn].forEach {
             $0.addTarget(self, action: #selector(audioBtnTapped(_:)), for: .touchUpInside)
         }
-        volumeSlider.addTarget(self, action: #selector(sliderTapped(_:)), for: .valueChanged)
+        //volumeSlider.addTarget(self, action: #selector(sliderTapped(_:)), for: .valueChanged)
         recordSwitch.addTarget(self, action: #selector(switchTapeed(_:)), for: .valueChanged)
         recordBtn.addTarget(self, action: #selector(recordBtnTapped(_:)), for: .touchUpInside)
     }

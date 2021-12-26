@@ -26,7 +26,7 @@ class DatePickerViewController: UIViewController {
         view.backgroundColor = UIColor(red: 0.0 / 255.0, green: 201.0 / 255.0, blue: 167.0 / 255.0, alpha: 1.0)
         setUI()
         //타이머 작업을 위한 셋팅
-        Timer.scheduledTimer(timeInterval: interval, target: self, selector: #selector(upDateTime), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: interval, target: self, selector: timeSelector, userInfo: nil, repeats: true)
     }
     
 }

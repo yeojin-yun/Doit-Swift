@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C170F85277818D30021C9C6 /* Sicilian_Breeze.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 0C170F84277818D30021C9C6 /* Sicilian_Breeze.mp3 */; };
+		0C170F87277874940021C9C6 /* RecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C170F86277874940021C9C6 /* RecorderViewController.swift */; };
 		0C41AA022770C6C5005D7274 /* htmlView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C41AA012770C6C5005D7274 /* htmlView.html */; };
 		0C41AA042772B86C005D7274 /* MissionPageControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */; };
 		0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29632765C4AD0093B45E /* AppDelegate.swift */; };
@@ -38,6 +40,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C170F84277818D30021C9C6 /* Sicilian_Breeze.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = Sicilian_Breeze.mp3; path = "../../../../DoitSwift-예제파일/13장/본문실습파일/Sicilian_Breeze.mp3"; sourceTree = "<group>"; };
+		0C170F86277874940021C9C6 /* RecorderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecorderViewController.swift; sourceTree = "<group>"; };
 		0C41AA012770C6C5005D7274 /* htmlView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = htmlView.html; sourceTree = "<group>"; };
 		0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionPageControlViewController.swift; sourceTree = "<group>"; };
 		0CEF29602765C4AD0093B45E /* Doit!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doit!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -158,7 +162,9 @@
 		0CEF29A22765D1700093B45E /* 4. 멀티미디어 활용 */ = {
 			isa = PBXGroup;
 			children = (
+				0C170F84277818D30021C9C6 /* Sicilian_Breeze.mp3 */,
 				0CEF29912765CD790093B45E /* MusicViewController.swift */,
+				0C170F86277874940021C9C6 /* RecorderViewController.swift */,
 				0CEF29932765CD850093B45E /* VideoViewController.swift */,
 				0CEF29952765CD8C0093B45E /* CameraViewController.swift */,
 				0CEF29972765CD950093B45E /* CoreGraphicsViewController.swift */,
@@ -239,6 +245,7 @@
 				0CEF29702765C4AE0093B45E /* LaunchScreen.storyboard in Resources */,
 				0CEF296D2765C4AE0093B45E /* Assets.xcassets in Resources */,
 				0CEF296B2765C4AD0093B45E /* Main.storyboard in Resources */,
+				0C170F85277818D30021C9C6 /* Sicilian_Breeze.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -262,6 +269,7 @@
 				0CEF299C2765CDA60093B45E /* SwipeGestureViewController.swift in Sources */,
 				0CEF29842765CD3C0093B45E /* AlertViewController.swift in Sources */,
 				0CEF29942765CD850093B45E /* VideoViewController.swift in Sources */,
+				0C170F87277874940021C9C6 /* RecorderViewController.swift in Sources */,
 				0CEF29882765CD530093B45E /* MapViewViewController.swift in Sources */,
 				0CEF29682765C4AD0093B45E /* ViewController.swift in Sources */,
 				0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */,
