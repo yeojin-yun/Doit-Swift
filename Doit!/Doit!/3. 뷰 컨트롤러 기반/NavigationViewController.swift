@@ -12,7 +12,7 @@ class NavigationViewController: UIViewController, EditDelegate {
 
 
     
-
+    //let textfield = uitextfield()
     //let mainLbl = UILabel()
     let editBtn = UIButton()
     let messageLbl = UILabel()
