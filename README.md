@@ -33,7 +33,11 @@ ImageMissionViewController.swift
 ```swift
 DatePickerViewController
 ```
-![datePciker구현]
-/Users/yeojin-yun/Desktop/Simulator Screen Recording - iPhone 11 Pro - 2021-12-14 at 21.44.56.gif
+![chapert2-4_미션](https://user-images.githubusercontent.com/85544383/147350582-8cc5bbf3-bb35-44f7-9911-f57ba44e3c84.gif)
+
 
 ## PickView
+```swift
+PickerViewViewController
+```
+![chapter2-3](https://user-images.githubusercontent.com/85544383/147350629-d7d2f121-f3a1-4547-a0ea-2dfd414ca726.gif)
