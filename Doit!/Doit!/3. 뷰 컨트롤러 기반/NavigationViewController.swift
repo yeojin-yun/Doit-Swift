@@ -10,39 +10,42 @@ import UIKit
 
 class NavigationViewController: UIViewController, EditDelegate {
 
-
     
-    //let textfield = uitextfield()
-    //let mainLbl = UILabel()
+
     let editBtn = UIButton()
     let messageLbl = UILabel()
     let textField = UITextField()
-    //let imgView = UIImageView()
+    let imgView = UIImageView()
     
     var textMessage: String = ""
+    
+    let imgOn = UIImage(named: "lamp_on")
+    let imgOff = UIImage(named: "lamp_off")
+    var originalIsOn = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-//        let next = NextViewController()
-//        next.delegate = self
-//        next.textMessage = textField.text!
+
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "edit", style: .plain, target: self, action: #selector(rightBtnTapped(_:)))
-        
     }
 
-    func didMessageEditDone(_ controller: NextViewController, message: String) {
+    func didMessageEditDone(message: String) {
         textField.text = message
-        let next = NextViewController()
-        next.delegate = self
-        next.textMessage = textField.text!
+        print("텍스트 델리게이트 : \(String(describing: textField.text))")
     }
-    
-//    func sendText(text: String) {
-//        textField.text = text
-//    }
-    
+
+    func didImgaeOnOffDone(isOn: Bool) {
+        print("switch 델리게이트 : \(isOn)")
+        if isOn {
+            imgView.image = imgOn
+            self.originalIsOn = true
+        } else {
+            imgView.image = imgOff
+            self.originalIsOn = false
+        }
+    }
 }
 
 
@@ -51,12 +54,23 @@ extension NavigationViewController {
     @objc func rightBtnTapped (_ sender: UIButton) {
         let nextVC = NextViewController()
         nextVC.navigationItem.title = "수정화면"
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.textMessage = textField.text!
+        nextVC.EditIsOn = originalIsOn
+        nextVC.delegate = self
+        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(nextVC, animated: true) 안됨
     }
     @objc func editBtnTapped(_ sender: UIButton) {
+        print("수정버튼 : \(String(describing: textField.text))")
         let nextVC = NextViewController()
         nextVC.navigationItem.title = "수정화면"
-        self.navigationController?.pushViewController(nextVC, animated: true)
+        nextVC.textMessage = textField.text!
+        nextVC.EditIsOn = originalIsOn
+        nextVC.delegate = self
+        nextVC.modalPresentationStyle = .fullScreen
+        present(nextVC, animated: true, completion: nil)
+        //self.navigationController?.pushViewController(nextVC, animated: true) 안됨
     }
 
 }
@@ -77,10 +91,17 @@ extension NavigationViewController {
         messageLbl.text = "Message"
         textField.borderStyle = .roundedRect
         textField.text = textMessage
+        //imgView.frame = CGRect(x: 50, y: 50, width: 50, height: 50)
+        imgView.image = imgOn
+        imgView.contentMode = .scaleAspectFit
+        imgView.layer.borderWidth = 1
+        imgView.layer.borderColor = CGColor.init(red: 0.0 / 255.0, green: 201.0 / 255.0, blue: 167.0 / 255.0, alpha: 1.0)
+
+        
     }
     
     final private func setConstraints() {
-        [editBtn, messageLbl, textField].forEach {
+        [editBtn, messageLbl, textField, imgView].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -95,7 +116,13 @@ extension NavigationViewController {
             
             textField.topAnchor.constraint(equalTo: messageLbl.bottomAnchor, constant: 10),
             textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            imgView.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 30),
+            imgView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            imgView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            imgView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -80),
+
         ])
     }
 }

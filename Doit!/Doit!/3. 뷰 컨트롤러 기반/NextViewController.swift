@@ -8,12 +8,12 @@
 import UIKit
 
 protocol EditDelegate {
-    func didMessageEditDone(_ controller: NextViewController, message: String)
+    //func didMessageEditDone(_ controller: NextViewController, message: String)
+    func didMessageEditDone(message: String)
+    //func didImgaeOnOffDone(_ controller: NextViewController, isOn: Bool)
+    func didImgaeOnOffDone(isOn: Bool)
 }
 
-//protocol TextSendDelegate: class {
-//    func sendText(text: String)
-//}
 
 class NextViewController: UIViewController {
 
@@ -22,23 +22,24 @@ class NextViewController: UIViewController {
     let completeBtn = UIButton()
     let messageLbl = UILabel()
     let textField = UITextField()
+    let onLbl = UILabel()
+    let switchOn = UISwitch()
+    
     
     var textValue: String = ""
     var textMessage: String = ""
     var delegate: EditDelegate?
-    //var delegate: TextSendDelegate?
-    
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        <#code#>
-//    }
+        
+    var EditIsOn = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
         configureUI()
-        //textField.text = text
-        //NextViewController.delegate = self
+        textField.text = textMessage
+        
     }
     
 }
@@ -47,12 +48,22 @@ class NextViewController: UIViewController {
 extension NextViewController {
 
     @objc func completeBtnTapped(_ sender: UIButton) {
-        if delegate != nil {
-            delegate?.didMessageEditDone(self, message: textField.text!)
+        let text = textField.text ?? ""
+        delegate?.didMessageEditDone(message: text)
+        delegate?.didImgaeOnOffDone(isOn: EditIsOn)
+        dismiss(animated: true, completion: nil)
+        
+        
+        
+        //self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func switchTapped(_ sender: UISwitch) {
+        if sender.isOn {
+            EditIsOn = true
+        } else {
+            EditIsOn = false
         }
-        
-        
-        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -69,13 +80,18 @@ extension NextViewController {
     final private func setAttributes() {
         completeBtn.setTitle("완료", for: .normal)
         completeBtn.setTitleColor(.black, for: .normal)
-        completeBtn.addTarget(self, action: #selector(completeBtnTapped(_:)), for: .touchUpInside)
         messageLbl.text = "Message"
-        textField.borderStyle = .bezel
+        textField.borderStyle = .roundedRect
+        onLbl.text = "전구 켜기"
+        switchOn.isOn = EditIsOn
+        
+        
+        completeBtn.addTarget(self, action: #selector(completeBtnTapped(_:)), for: .touchUpInside)
+        switchOn.addTarget(self, action: #selector(switchTapped(_:)), for: .touchUpInside)
     }
     
     final private func setConstraints() {
-        [mainLbl, completeBtn, messageLbl, textField].forEach {
+        [mainLbl, completeBtn, messageLbl, textField, onLbl, switchOn].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -93,7 +109,14 @@ extension NextViewController {
             
             textField.topAnchor.constraint(equalTo: messageLbl.bottomAnchor, constant: 10),
             textField.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20)
+            textField.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+            
+            onLbl.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 30),
+            onLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 100),
+            
+            switchOn.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 30),
+            switchOn.leadingAnchor.constraint(equalTo: onLbl.trailingAnchor, constant: 20)
+            
         ])
     }
 }

@@ -21,7 +21,7 @@ class RecorderViewController: UIViewController {
     let volumeSlider = UISlider()
     
     let recordLbl = UILabel()
-    let recordSwitch = UISwitch()
+    //let recordSwitch = UISwitch()
     let recordBtn = UIButton()
     let recordTime = UILabel()
     
@@ -47,6 +47,7 @@ class RecorderViewController: UIViewController {
         } else {
             initRecord()
         }
+        recordSetting()
     }
 }
 
@@ -83,19 +84,24 @@ extension RecorderViewController {
         audioPlayer.volume = volumeSlider.value
     }
     
-    @objc func switchTapeed(_ sender: UISwitch) {
-        if sender.isOn { // 녹음모드일 때 -> 모든 재생 모드는 false가 되도록
-            //audioPlayer.stop()
-            //audioPlayer.currentTime = 0
-            recordTime.text = convertNSTimerIntervalToString(0)
-            isRecordMode = true
-            recordBtn.isEnabled = true
-            recordTime.isEnabled = true
-        } else { // 재생모드일 때 -> 모든 녹음 모드가 false가 되도록
-            isRecordMode = false
-            recordBtn.isEnabled = false
-            recordTime.isEnabled = false
-        }
+//    @objc func switchTapeed(_ sender: UISwitch) {
+//        if sender.isOn { // 녹음모드일 때 -> 모든 재생 모드는 false가 되도록
+//            //audioPlayer.stop()
+//            //audioPlayer.currentTime = 0
+//
+//        } else { // 재생모드일 때 -> 모든 녹음 모드가 false가 되도록
+//            isRecordMode = false
+//            recordBtn.isEnabled = false
+//            recordTime.isEnabled = false
+//        }
+//
+//    }
+    
+    func recordSetting() {
+        recordTime.text = convertNSTimerIntervalToString(0)
+        isRecordMode = true
+        recordBtn.isEnabled = true
+        recordTime.isEnabled = true
         selectAudioFile()
         initRecord()
     }
@@ -214,8 +220,8 @@ extension RecorderViewController {
         [playBtn, pauseBtn, stopBtn].forEach {
             $0.addTarget(self, action: #selector(audioBtnTapped(_:)), for: .touchUpInside)
         }
-        //volumeSlider.addTarget(self, action: #selector(sliderTapped(_:)), for: .valueChanged)
-        recordSwitch.addTarget(self, action: #selector(switchTapeed(_:)), for: .valueChanged)
+        volumeSlider.addTarget(self, action: #selector(sliderTapped(_:)), for: .valueChanged)
+        //recordSwitch.addTarget(self, action: #selector(switchTapeed(_:)), for: .valueChanged)
         recordBtn.addTarget(self, action: #selector(recordBtnTapped(_:)), for: .touchUpInside)
     }
     final private func setConstraints() {
@@ -229,7 +235,7 @@ extension RecorderViewController {
         btnStack.distribution = .fillEqually
         
         
-        [mainLbl, progressBar, lblStack, btnStack, volumeLbl, volumeSlider, recordLbl, recordSwitch, recordBtn, recordTime].forEach {
+        [mainLbl, progressBar, lblStack, btnStack, volumeLbl, volumeSlider, recordLbl, recordBtn, recordTime].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -260,8 +266,8 @@ extension RecorderViewController {
             recordLbl.topAnchor.constraint(equalTo: volumeLbl.bottomAnchor, constant: 50),
             recordLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 130),
             
-            recordSwitch.topAnchor.constraint(equalTo: recordLbl.topAnchor),
-            recordSwitch.leadingAnchor.constraint(equalTo: recordLbl.trailingAnchor, constant: 20),
+//            recordSwitch.topAnchor.constraint(equalTo: recordLbl.topAnchor),
+//            recordSwitch.leadingAnchor.constraint(equalTo: recordLbl.trailingAnchor, constant: 20),
             
             recordBtn.topAnchor.constraint(equalTo: recordLbl.bottomAnchor, constant: 40),
             recordBtn.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 130),
