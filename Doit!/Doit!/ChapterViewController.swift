@@ -191,7 +191,8 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
             case 3:
                 let nextVC = TableViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
-                navigationController?.navigationBar.prefersLargeTitles = true
+                navigationController?.navigationBar.prefersLargeTitles = false
+                nextVC.navigationItem.largeTitleDisplayMode = .never
                 navigationController?.pushViewController(nextVC, animated: true)
             default:
                 break

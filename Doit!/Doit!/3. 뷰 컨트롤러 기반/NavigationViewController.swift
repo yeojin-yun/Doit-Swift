@@ -33,11 +33,10 @@ class NavigationViewController: UIViewController, EditDelegate {
 
     func didMessageEditDone(message: String) {
         textField.text = message
-        print("텍스트 델리게이트 : \(String(describing: textField.text))")
     }
 
     func didImgaeOnOffDone(isOn: Bool) {
-        print("switch 델리게이트 : \(isOn)")
+
         if isOn {
             imgView.image = imgOn
             self.originalIsOn = true
@@ -53,24 +52,21 @@ class NavigationViewController: UIViewController, EditDelegate {
 extension NavigationViewController {
     @objc func rightBtnTapped (_ sender: UIButton) {
         let nextVC = NextViewController()
-        nextVC.navigationItem.title = "수정화면"
+        nextVC.delegate = self
         nextVC.textMessage = textField.text!
         nextVC.EditIsOn = originalIsOn
-        nextVC.delegate = self
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
-        //self.navigationController?.pushViewController(nextVC, animated: true) 안됨
+        
     }
+    
     @objc func editBtnTapped(_ sender: UIButton) {
-        print("수정버튼 : \(String(describing: textField.text))")
         let nextVC = NextViewController()
-        nextVC.navigationItem.title = "수정화면"
+        nextVC.delegate = self
         nextVC.textMessage = textField.text!
         nextVC.EditIsOn = originalIsOn
-        nextVC.delegate = self
         nextVC.modalPresentationStyle = .fullScreen
         present(nextVC, animated: true, completion: nil)
-        //self.navigationController?.pushViewController(nextVC, animated: true) 안됨
     }
 
 }
@@ -91,7 +87,6 @@ extension NavigationViewController {
         messageLbl.text = "Message"
         textField.borderStyle = .roundedRect
         textField.text = textMessage
-        //imgView.frame = CGRect(x: 50, y: 50, width: 50, height: 50)
         imgView.image = imgOn
         imgView.contentMode = .scaleAspectFit
         imgView.layer.borderWidth = 1
