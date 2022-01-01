@@ -24,6 +24,7 @@ class TableViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItems = [UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(rightBtnTapped(_:))), UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(leftBtnTapped(_:)))]
         
+        //self.navigationItem.rightBarButtonItem = self.editButtonItem
         //self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(rightBtnTapped(_:)))
         
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(leftBtnTapped(_:)))
