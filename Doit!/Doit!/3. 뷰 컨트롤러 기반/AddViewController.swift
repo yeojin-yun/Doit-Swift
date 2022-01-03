@@ -16,9 +16,16 @@ class AddViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-        
+        sendBtn.addTarget(self, action: #selector(sendBtnTapped(_:)), for: .touchUpInside)
     }
     
+    @objc func sendBtnTapped(_ sender: UIButton) {
+        items.append(textField.text!)
+        images.append("clock.png")
+        textField.text = ""
+        navigationController?.popViewController(animated: true)
+        
+    }
 
     
 

@@ -10,12 +10,15 @@ import UIKit
 class DetailViewController: UIViewController {
     
     let mainLbl = UILabel()
+    var thingsToDo = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        configureUI()
         
     }
+    
     
 
 
@@ -29,7 +32,7 @@ extension DetailViewController {
         setConstraints()
     }
     final private func setAttributes() {
-        mainLbl.text = " "
+        mainLbl.text = thingsToDo
     }
     final private func setConstraints() {
         [mainLbl].forEach {
@@ -38,9 +41,10 @@ extension DetailViewController {
         }
         
         NSLayoutConstraint.activate([
-            mainLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
-            mainLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
-            mainLbl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            mainLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
+            mainLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+//            mainLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+//            mainLbl.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -30),
         ])
     }
 }
