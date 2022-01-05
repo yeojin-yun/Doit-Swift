@@ -43,6 +43,7 @@
 		0CEF299C2765CDA60093B45E /* SwipeGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF299B2765CDA60093B45E /* SwipeGestureViewController.swift */; };
 		0CEF299E2765CDB10093B45E /* PinchGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF299D2765CDB10093B45E /* PinchGestureViewController.swift */; };
 		0CEF29A52765FA160093B45E /* ImageMissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29A42765FA160093B45E /* ImageMissionViewController.swift */; };
+		0CF4DCA52785BC0E0045EECE /* Music2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF4DCA42785BC0E0045EECE /* Music2ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -84,6 +85,7 @@
 		0CEF299B2765CDA60093B45E /* SwipeGestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureViewController.swift; sourceTree = "<group>"; };
 		0CEF299D2765CDB10093B45E /* PinchGestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureViewController.swift; sourceTree = "<group>"; };
 		0CEF29A42765FA160093B45E /* ImageMissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMissionViewController.swift; sourceTree = "<group>"; };
+		0CF4DCA42785BC0E0045EECE /* Music2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +184,7 @@
 			children = (
 				0C170F84277818D30021C9C6 /* Sicilian_Breeze.mp3 */,
 				0CEF29912765CD790093B45E /* MusicViewController.swift */,
+				0CF4DCA42785BC0E0045EECE /* Music2ViewController.swift */,
 				0C170F86277874940021C9C6 /* RecorderViewController.swift */,
 				0CEF29932765CD850093B45E /* VideoViewController.swift */,
 				0CEF29952765CD8C0093B45E /* CameraViewController.swift */,
@@ -287,6 +290,7 @@
 				0CEF298A2765CD600093B45E /* PageControlViewController.swift in Sources */,
 				0CEF29922765CD790093B45E /* MusicViewController.swift in Sources */,
 				0CEF297A2765C8720093B45E /* ChapterViewController.swift in Sources */,
+				0CF4DCA52785BC0E0045EECE /* Music2ViewController.swift in Sources */,
 				0CEF29802765CD2A0093B45E /* DatePickerViewController.swift in Sources */,
 				0CEF299C2765CDA60093B45E /* SwipeGestureViewController.swift in Sources */,
 				0CEF29842765CD3C0093B45E /* AlertViewController.swift in Sources */,

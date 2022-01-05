@@ -52,7 +52,7 @@ class MusicViewController: UIViewController {
     }
     
     @objc func rightBtnTapped(_ sender: UIButton) {
-        let nextVC = RecorderViewController()
+        let nextVC = Music2ViewController()
         self.navigationController?.pushViewController(nextVC, animated: true)
     }
 }

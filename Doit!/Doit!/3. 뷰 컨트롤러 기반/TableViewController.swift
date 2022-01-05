@@ -14,16 +14,22 @@ class TableViewController: UIViewController {
 
     let tableView = UITableView()
     let barBtn = UIButton()
-
+    //let leftButton = UIBarButtonItem()
+    //let rightButton = UIBarButtonItem()
     
-    
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
         
+        
         let leftBtn = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(leftBtnTapped(_:)))
-        let rightBtn = UIBarButtonItem(title: "추가", style: .plain, target: self, action: #selector(rightBtnTapped(_:)))
+        
+        
+        let rightBtn = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(rightBtnTapped(_:)))
+        
+        
         
         
         self.navigationItem.rightBarButtonItems = [rightBtn, leftBtn]
@@ -33,7 +39,8 @@ class TableViewController: UIViewController {
         
         //self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "수정", style: .plain, target: self, action: #selector(leftBtnTapped(_:)))
         
-        self.navigationItem.rightBarButtonItems?[1] = self.editButtonItem
+    
+        //self.navigationItem.rightBarButtonItems?[1] = self.editButtonItem
         //tableView.setEditing(true, animated: true)
     }
     
@@ -95,10 +102,14 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     @objc func leftBtnTapped(_ sender: UIBarButtonItem) {
-        print("Tapped")
-//        if self.navigationItem.rightBarButtonItems?[1].title == "edit" {
-//        }
-        tableView.setEditing(true, animated: true)
+        print("\(self.navigationItem.rightBarButtonItems![1].title)")
+        if self.navigationItem.rightBarButtonItems?[1].title == "edit" {
+            //self.navigationItem.rightBarButtonItems?[1] = self.editButtonItem
+            tableView.setEditing(true, animated: true)
+            
+        } else {
+            tableView.endEditing(true)
+        }
 //        self.navigationItem.rightBarButtonItems?[1] = self.editButtonItem
         
         //tableView.setEditing(true, animated: true)

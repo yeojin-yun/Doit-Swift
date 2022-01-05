@@ -190,7 +190,7 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
                 navigationController?.pushViewController(nextVC, animated: true)
             case 3:
                 let nextVC = TableViewController()
-                nextVC.navigationItem.title = selectedList[indexPath.row]
+                nextVC.navigationItem.title = ""
                 navigationController?.navigationBar.prefersLargeTitles = false
                 nextVC.navigationItem.largeTitleDisplayMode = .never
                 navigationController?.pushViewController(nextVC, animated: true)

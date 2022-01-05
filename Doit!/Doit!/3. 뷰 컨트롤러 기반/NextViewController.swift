@@ -51,6 +51,7 @@ extension NextViewController {
         let text = textField.text ?? ""
         delegate?.didMessageEditDone(message: text)
         delegate?.didImgaeOnOffDone(isOn: EditIsOn)
+        self.navigationController?.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
         
         

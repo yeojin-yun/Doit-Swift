@@ -65,8 +65,10 @@ extension NavigationViewController {
         nextVC.delegate = self
         nextVC.textMessage = textField.text!
         nextVC.EditIsOn = originalIsOn
-        nextVC.modalPresentationStyle = .fullScreen
-        present(nextVC, animated: true, completion: nil)
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        //nextVC.modalPresentationStyle = .fullScreen
+        
+        //present(nextVC, animated: true, completion: nil)
     }
 
 }
