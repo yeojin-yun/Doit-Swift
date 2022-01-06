@@ -42,6 +42,7 @@ class Music2ViewController: UIViewController {
         view.backgroundColor = .white
         selectAudioFile()
         initRecord()
+        
     }
     
     @objc func updatePlayTime() {
@@ -90,13 +91,15 @@ extension Music2ViewController {
         audioRecorder.delegate = self
         
         volumeSlider.value = 1.0
-        audioRecorder.volume = volumeSlider.value
+        //audioPlayer.volume = volumeSlider.value
         currentLbl.text = convertTimeInterval2String(0)
         endTimeLbl.text = convertTimeInterval2String(0)
         //setPlayButtons(false, pause: false, stop: false)
     }
     
     func setRecordMode() {
+        audioPlayer.currentTime = 0
+        recordTime.text = convertTimeInterval2String(0)
         
     }
 }

@@ -8,186 +8,116 @@
 import UIKit
 import AVFoundation
 
-class RecorderViewController: UIViewController {
 
-    let mainLbl = UILabel()
+class RecorderViewController: UIViewController {
+    
     let progressBar = UIProgressView()
-    let currentLbl = UILabel()
-    let endTimeLbl = UILabel()
-    let playBtn = UIButton()
-    let pauseBtn = UIButton()
-    let stopBtn = UIButton()
-    let volumeLbl = UILabel()
+    var currentTimeLbl = UILabel()
+    var endTimeLbl = UILabel()
+    var recordBtn = UIButton()
+    var playBtn = UIButton()
+    var stopBtn = UIButton()
     let volumeSlider = UISlider()
     
-    let recordLbl = UILabel()
-    //let recordSwitch = UISwitch()
-    let recordBtn = UIButton()
-    let recordTime = UILabel()
+    var soundRecorder: AVAudioRecorder!
+    var soundPlayer: AVAudioPlayer!
     
-    //AVAudioPlayer를 위한 설정
-    var audioPlayer: AVAudioPlayer!
-    var audioFile: URL!
-    let maxVolume: Float = 10.0
-    var progressTimer: Timer!
-    
-    
-    //📻 녹음기를 위한 설정
-    var audioRecorder: AVAudioRecorder! // 객체 찍어내기
-    var isRecordMode = false // 녹음 기본 설정 (처음에는 녹음기가 비활성화 되어 있어야 함)
+    var fileName: String = "audioFile.m4a"
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-        selectAudioFile()
-        if !isRecordMode {
-            recordBtn.isEnabled = false
-            recordTime.isEnabled = false
-        } else {
-            initRecord()
-        }
-        recordSetting()
+        setupRecorder()
+        playBtn.isEnabled = false
     }
+    
+}
+
+
+
+
+
+extension RecorderViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+    func getDocumentsDirector() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
+    }
+    
+    func setupRecorder() {
+        let audioFileName = getDocumentsDirector().appendingPathComponent(fileName)
+        let recordSetting = [AVFormatIDKey: kAudioFormatAppleLossless,
+                             AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue,
+                             AVEncoderBitRateKey: 320000,
+                             AVNumberOfChannelsKey: 2,
+                             AVSampleRateKey: 44100.2] as [String: Any]
+        do {
+            soundRecorder = try AVAudioRecorder(url: audioFileName, settings: recordSetting)
+            soundRecorder.delegate = self
+            soundRecorder.prepareToRecord()
+        } catch {
+            print("error")
+        }
+    }
+    
+    
+    func setupPlayer() {
+        let audioFilename = getDocumentsDirector().appendingPathComponent(fileName)
+        do {
+            soundPlayer = try AVAudioPlayer(contentsOf: audioFilename)
+            soundPlayer.delegate = self
+            soundPlayer.prepareToPlay()
+            soundPlayer.volume = 1.0
+        } catch {
+            print("error")
+        }
+    }
+    
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        playBtn.isEnabled = true
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        recordBtn.isEnabled = true
+        playBtn.setTitle("Play", for: .normal)
+    }
+    
 }
 
 //MARK: -Event
 extension RecorderViewController {
-    @objc func audioBtnTapped(_ sender: UIButton) {
-        switch sender.currentTitle {
-        case "Play":
-            //audioPlayer.play()
-            setPlayBtnSetting(play: false, pause: true, stop: true)
-            progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateRecordTime), userInfo: nil, repeats: true)
-        case "Pause":
-            //audioPlayer.pause()
-            setPlayBtnSetting(play: true, pause: false, stop: true)
-        case "Stop":
-            //audioPlayer.stop()
-            // 정지하면 처음부터 재생해야 하므로, currentTime도 다시 초기값 0으로 셋팅 & 레이블 표시도 0으로 셋팅
-            //audioPlayer.currentTime = 0
-            currentLbl.text = convertNSTimerIntervalToString(0)
-            setPlayBtnSetting(play: true, pause: true, stop: false)
-            // 타이머도 멈추어야 함
-            progressTimer.invalidate()
-        default:
-            break
-        }
-    }
-    
-//    @objc func updateTime() {
-//        currentLbl.text = convertNSTimerIntervalToString(audioPlayer.currentTime)
-//        progressBar.progress = Float(audioPlayer.currentTime / audioPlayer.duration)
-//    }
-//
-    @objc func sliderTapped(_ sender: UISlider) {
-        audioPlayer.volume = volumeSlider.value
-    }
-    
-//    @objc func switchTapeed(_ sender: UISwitch) {
-//        if sender.isOn { // 녹음모드일 때 -> 모든 재생 모드는 false가 되도록
-//            //audioPlayer.stop()
-//            //audioPlayer.currentTime = 0
-//
-//        } else { // 재생모드일 때 -> 모든 녹음 모드가 false가 되도록
-//            isRecordMode = false
-//            recordBtn.isEnabled = false
-//            recordTime.isEnabled = false
-//        }
-//
-//    }
-    
-    func recordSetting() {
-        recordTime.text = convertNSTimerIntervalToString(0)
-        isRecordMode = true
-        recordBtn.isEnabled = true
-        recordTime.isEnabled = true
-        selectAudioFile()
-        initRecord()
-    }
-    
-    @objc func recordBtnTapped(_ sender: UIButton) {
-        // 버튼 이름이 "Record"면 녹음모드기 때문에 녹음 시작하고, 버튼을 "Stop"으로 변경
-        if (sender as AnyObject).titleLabel?.text == "Record" {
-            audioRecorder.record()
-            (sender as AnyObject).setTitle("Stop", for: UIControl.State())
-            progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateRecordTime), userInfo: nil, repeats: true)
-        // 현재 녹음 중 -> 버튼을 "Record" 바꾸고, play버튼 활성화, 녹음한 파일 재생
+    @objc func recordBtnTapped(sender: UIButton) {
+        if recordBtn.titleLabel?.text == "Record" {
+            soundRecorder.record()
+            recordBtn.setTitle("Stop", for: .normal)
+            playBtn.isEnabled = false
         } else {
-            audioRecorder.stop()
-            (sender as AnyObject).setTitle("Record", for: UIControl.State())
-            playBtn.isEnabled = true
-            
+            soundRecorder.stop()
+            recordBtn.setTitle("Record", for: .normal)
+            playBtn.isEnabled = false
+        }
+    }
+    @objc func playBtnTapped(_ sender: UIButton) {
+        if playBtn.titleLabel?.text == "Play" {
+            playBtn.setTitle("Stop", for: .normal)
+            recordBtn.isEnabled = false
+            setupPlayer()
+            soundPlayer.play()
+        } else {
+            soundPlayer.stop()
+            playBtn.setTitle("Play", for: .normal)
+            recordBtn.isEnabled = false
         }
     }
     
-    @objc func updateRecordTime() {
-        recordTime.text = convertNSTimerIntervalToString(audioRecorder.currentTime)
-    }
-}
-
-//MARK: -Delegate
-extension RecorderViewController: AVAudioPlayerDelegate, AVAudioRecorderDelegate {
-    
-    // 📻 녹음 초기 셋팅
-    func initRecord() {
-        let recordSettings = [
-            AVFormatIDKey: NSNumber(value: kAudioFormatAppleLossless as UInt32), // 포맷 : Apple Lossless
-            AVEncoderAudioQualityKey: AVAudioQuality.max.rawValue, // 음질 : 최대
-            AVEncoderBitRateKey: 320000, // 비트율 320,000(320kbps)
-            AVNumberOfChannelsKey: 2, // 오디오 채널 : 2
-            AVSampleRateKey: 44100.0] as [String: Any] // 샘플률 44,100Hz
+    @objc func stopBtnTapped(_ sender: UIButton) {
         
-        do {
-            audioRecorder = try AVAudioRecorder(url: audioFile, settings: recordSettings)
-        } catch let error as NSError {
-            print("Error-initRecord: \(error)")
-        }
-        audioRecorder.delegate = self
-        volumeSlider.value = 1.0
-        //audioPlayer.volume = volumeSlider.value
-        endTimeLbl.text = convertNSTimerIntervalToString(0)
-        setPlayBtnSetting(play: false, pause: false, stop: false)
+    }
+    
+    @objc func sliderChanged(_ sender: UIButton) {
         
-        let session = AVAudioSession.sharedInstance()
-        do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default)
-            try AVAudioSession.sharedInstance().setActive(true)
-        } catch let error as NSError {
-            print("Error-setCategory: \(error)")
-        }
-        do {
-            try session.setActive(true)
-        } catch let error as NSError {
-            print("Error-setActive: \(error)")
-        }
     }
-    
-    
-    func convertNSTimerIntervalToString(_ time: TimeInterval) -> String {
-        // time을 파라미터로 받아 재생 시간의 '분' 계산하여 정수로 저장
-        let min = Int(time / 60)
-        
-        // time을 60으로 나눈 나머지 값을 정수 값으로 저장
-        let sec = Int(time.truncatingRemainder(dividingBy: 60))
-        
-        // 위의 두 값을 "%02d:%02d" 형식으로 저장하여 상수에 저장
-        let strTime = String(format: "%02d:%02d", min, sec)
-        return strTime
-    }
-    
-    func setPlayBtnSetting(play: Bool, pause: Bool, stop: Bool) {
-        playBtn.isEnabled = play
-        pauseBtn.isEnabled = pause
-        stopBtn.isEnabled = stop
-    }
-    
-    // 📻 녹음파일과 재생 파일이 안 겹치게 하기 (녹음모드 아닐 때만 url생성)
-    func selectAudioFile() {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        audioFile = documentDirectory.appendingPathComponent("recordFile.m4a")
-    }
-    
 }
 
 
@@ -198,53 +128,44 @@ extension RecorderViewController {
         setConstraints()
     }
     final private func setAttributes() {
-        mainLbl.text = "Recorder Player"
-        mainLbl.font = UIFont.boldSystemFont(ofSize: 23)
-        //progressBar.progress = 0.0
-        //currentLbl.text = "currenTime"
-        //endTimeLbl.text = "endTime"
-        endTimeLbl.textAlignment = .right
-        playBtn.setTitle("Play", for: .normal)
-        playBtn.setTitleColor(.black, for: .normal)
-        pauseBtn.setTitle("Pause", for: .normal)
-        pauseBtn.setTitleColor(.black, for: .normal)
-        stopBtn.setTitle("Stop", for: .normal)
-        stopBtn.setTitleColor(.black, for: .normal)
-        volumeLbl.text = "Volume"
-        recordLbl.text = "Record"
-        recordLbl.textColor = .black
         recordBtn.setTitle("Record", for: .normal)
-        recordBtn.setTitleColor(.black, for: .normal)
-        //recordTime.text = convertNSTimerIntervalToString(0)
+        playBtn.setTitle("Play", for: .normal)
+        stopBtn.setTitle("Stop", for: .normal)
+        currentTimeLbl.text = "00:00"
+        endTimeLbl.text = "00:00"
+        endTimeLbl.textAlignment = .right
         
-        [playBtn, pauseBtn, stopBtn].forEach {
-            $0.addTarget(self, action: #selector(audioBtnTapped(_:)), for: .touchUpInside)
+        [recordBtn, playBtn, stopBtn].forEach {
+            $0.setTitleColor(.white, for: .normal)
+            $0.backgroundColor = .black
+            $0.layer.cornerRadius = 10
         }
-        volumeSlider.addTarget(self, action: #selector(sliderTapped(_:)), for: .valueChanged)
-        //recordSwitch.addTarget(self, action: #selector(switchTapeed(_:)), for: .valueChanged)
-        recordBtn.addTarget(self, action: #selector(recordBtnTapped(_:)), for: .touchUpInside)
     }
+    final private func addTarget() {
+        volumeSlider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
+        playBtn.addTarget(self, action: #selector(playBtnTapped(_:)), for: .touchUpInside)
+        recordBtn.addTarget(self, action: #selector(recordBtnTapped(sender:)), for: .touchUpInside)
+        stopBtn.addTarget(self, action: #selector(stopBtnTapped(_:)), for: .touchUpInside)
+        
+    }
+    
     final private func setConstraints() {
-        let lblStack = UIStackView(arrangedSubviews: [currentLbl, endTimeLbl])
+        let stackView = UIStackView(arrangedSubviews: [recordBtn, playBtn, stopBtn])
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 30
+        
+        let lblStack = UIStackView(arrangedSubviews: [currentTimeLbl, endTimeLbl])
         lblStack.axis = .horizontal
         lblStack.distribution = .fillEqually
         
-        
-        let btnStack = UIStackView(arrangedSubviews: [playBtn, pauseBtn, stopBtn])
-        btnStack.axis = .horizontal
-        btnStack.distribution = .fillEqually
-        
-        
-        [mainLbl, progressBar, lblStack, btnStack, volumeLbl, volumeSlider, recordLbl, recordBtn, recordTime].forEach {
+        [stackView, progressBar, volumeSlider, lblStack].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([
-            mainLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
-            mainLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
-            progressBar.topAnchor.constraint(equalTo: mainLbl.bottomAnchor, constant: 30),
+            progressBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             progressBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             progressBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
@@ -252,29 +173,14 @@ extension RecorderViewController {
             lblStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             lblStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            btnStack.topAnchor.constraint(equalTo: lblStack.bottomAnchor, constant: 30),
-            btnStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            btnStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
-            
-            volumeLbl.topAnchor.constraint(equalTo: btnStack.bottomAnchor, constant: 30),
-            volumeLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
-            
-            volumeSlider.topAnchor.constraint(equalTo: btnStack.bottomAnchor, constant: 30),
-            volumeSlider.leadingAnchor.constraint(equalTo: volumeLbl.trailingAnchor, constant: 20),
+            volumeSlider.topAnchor.constraint(equalTo: progressBar.bottomAnchor, constant: 80),
+            volumeSlider.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             volumeSlider.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
-            recordLbl.topAnchor.constraint(equalTo: volumeLbl.bottomAnchor, constant: 50),
-            recordLbl.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 130),
-            
-//            recordSwitch.topAnchor.constraint(equalTo: recordLbl.topAnchor),
-//            recordSwitch.leadingAnchor.constraint(equalTo: recordLbl.trailingAnchor, constant: 20),
-            
-            recordBtn.topAnchor.constraint(equalTo: recordLbl.bottomAnchor, constant: 40),
-            recordBtn.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 130),
-            
-            recordTime.topAnchor.constraint(equalTo: recordBtn.topAnchor, constant: 6),
-            recordTime.leadingAnchor.constraint(equalTo: recordBtn.trailingAnchor, constant: 20),
-            
+            stackView.topAnchor.constraint(equalTo: volumeSlider.bottomAnchor, constant: 70),
+            stackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            stackView.widthAnchor.constraint(equalToConstant: 350)
         ])
+        
     }
 }
