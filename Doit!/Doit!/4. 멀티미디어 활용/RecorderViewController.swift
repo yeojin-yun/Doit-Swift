@@ -11,6 +11,7 @@ import AVFoundation
 
 class RecorderViewController: UIViewController {
     
+    let mainLbl = UILabel()
     let progressBar = UIProgressView()
     var currentTimeLbl = UILabel()
     var endTimeLbl = UILabel()
@@ -18,6 +19,8 @@ class RecorderViewController: UIViewController {
     var playBtn = UIButton()
     var stopBtn = UIButton()
     let volumeSlider = UISlider()
+    
+    var progressTimer: Timer!
     
     var soundRecorder: AVAudioRecorder!
     var soundPlayer: AVAudioPlayer!
@@ -30,6 +33,7 @@ class RecorderViewController: UIViewController {
         configureUI()
         setupRecorder()
         playBtn.isEnabled = false
+        
     }
     
 }
@@ -67,7 +71,7 @@ extension RecorderViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate
             soundPlayer = try AVAudioPlayer(contentsOf: audioFilename)
             soundPlayer.delegate = self
             soundPlayer.prepareToPlay()
-            soundPlayer.volume = 1.0
+            soundPlayer.volume = volumeSlider.value
         } catch {
             print("error")
         }
@@ -80,9 +84,25 @@ extension RecorderViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         recordBtn.isEnabled = true
-        playBtn.setTitle("Play", for: .normal)
+        currentTimeLbl.text = convertNSTimerIntervalToString(0)
     }
     
+    @objc func updateTime() {
+        currentTimeLbl.text = convertNSTimerIntervalToString(soundPlayer.currentTime)
+        progressBar.progress = Float(soundPlayer.currentTime / soundPlayer.duration)
+    }
+    
+    func convertNSTimerIntervalToString(_ time: TimeInterval) -> String{
+        // time을 파라미터로 받아 재생 시간의 '분' 계산하여 정수로 저장
+        let min = Int(time / 60)
+        
+        // time을 60으로 나눈 나머지 값을 정수 값으로 저장
+        let sec = Int(time.truncatingRemainder(dividingBy: 60))
+        
+        // 위의 두 값을 "%02d:%02d" 형식으로 저장하여 상수에 저장
+        let strTime = String(format: "%02d:%02d", min, sec)
+        return strTime
+    }
 }
 
 //MARK: -Event
@@ -96,28 +116,35 @@ extension RecorderViewController {
             soundRecorder.stop()
             recordBtn.setTitle("Record", for: .normal)
             playBtn.isEnabled = false
+            endTimeLbl.text = convertNSTimerIntervalToString(soundRecorder.currentTime)
         }
+        
     }
     @objc func playBtnTapped(_ sender: UIButton) {
-        if playBtn.titleLabel?.text == "Play" {
-            playBtn.setTitle("Stop", for: .normal)
-            recordBtn.isEnabled = false
-            setupPlayer()
-            soundPlayer.play()
-        } else {
-            soundPlayer.stop()
-            playBtn.setTitle("Play", for: .normal)
-            recordBtn.isEnabled = false
-        }
+        //        if playBtn.titleLabel?.text == "Play" {
+        //            playBtn.setTitle("Stop", for: .normal)
+        //            recordBtn.isEnabled = false
+        //            setupPlayer()
+        //            soundPlayer.play()
+        //        } else {
+        //            soundPlayer.stop()
+        //            playBtn.setTitle("Play", for: .normal)
+        //            recordBtn.isEnabled = false
+        //        }
+        setupPlayer()
+        soundPlayer.play()
+        recordBtn.isEnabled = false
+        progressTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
     }
     
     @objc func stopBtnTapped(_ sender: UIButton) {
-        
+        print(#function)
+        soundPlayer.stop()
     }
     
-    @objc func sliderChanged(_ sender: UIButton) {
-        
-    }
+//    @objc func sliderChanged(_ sender: UIButton) {
+//        soundPlayer.volume = volumeSlider.value
+//    }
 }
 
 
@@ -126,23 +153,34 @@ extension RecorderViewController {
     final private func configureUI() {
         setAttributes()
         setConstraints()
+        addTarget()
     }
     final private func setAttributes() {
+        mainLbl.text = "Recorder"
+        mainLbl.font = UIFont.boldSystemFont(ofSize: 30)
         recordBtn.setTitle("Record", for: .normal)
+        recordBtn.setTitleColor(.white, for: .normal)
+        recordBtn.backgroundColor = .purple
+        recordBtn.layer.cornerRadius = 10
         playBtn.setTitle("Play", for: .normal)
         stopBtn.setTitle("Stop", for: .normal)
         currentTimeLbl.text = "00:00"
         endTimeLbl.text = "00:00"
         endTimeLbl.textAlignment = .right
+        volumeSlider.value = 2.0
         
-        [recordBtn, playBtn, stopBtn].forEach {
+        [playBtn, stopBtn].forEach {
             $0.setTitleColor(.white, for: .normal)
             $0.backgroundColor = .black
             $0.layer.cornerRadius = 10
         }
+        
+        volumeSlider.maximumValue = 10.0
+        progressBar.progress = 0.0
+        
     }
     final private func addTarget() {
-        volumeSlider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
+        //volumeSlider.addTarget(self, action: #selector(sliderChanged(_:)), for: .valueChanged)
         playBtn.addTarget(self, action: #selector(playBtnTapped(_:)), for: .touchUpInside)
         recordBtn.addTarget(self, action: #selector(recordBtnTapped(sender:)), for: .touchUpInside)
         stopBtn.addTarget(self, action: #selector(stopBtnTapped(_:)), for: .touchUpInside)
@@ -159,12 +197,15 @@ extension RecorderViewController {
         lblStack.axis = .horizontal
         lblStack.distribution = .fillEqually
         
-        [stackView, progressBar, volumeSlider, lblStack].forEach {
+        [mainLbl, stackView, progressBar, volumeSlider, lblStack].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([
+            mainLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
+            mainLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            
             progressBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
             progressBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             progressBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
