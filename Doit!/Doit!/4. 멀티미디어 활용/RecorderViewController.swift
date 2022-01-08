@@ -89,6 +89,7 @@ extension RecorderViewController: AVAudioRecorderDelegate, AVAudioPlayerDelegate
     
     @objc func updateTime() {
         currentTimeLbl.text = convertNSTimerIntervalToString(soundPlayer.currentTime)
+        endTimeLbl.text = convertNSTimerIntervalToString(soundPlayer.duration)
         progressBar.progress = Float(soundPlayer.currentTime / soundPlayer.duration)
     }
     
@@ -110,6 +111,7 @@ extension RecorderViewController {
     @objc func recordBtnTapped(sender: UIButton) {
         if recordBtn.titleLabel?.text == "Record" {
             soundRecorder.record()
+            endTimeLbl.text = convertNSTimerIntervalToString(0)
             recordBtn.setTitle("Stop", for: .normal)
             playBtn.isEnabled = false
         } else {
