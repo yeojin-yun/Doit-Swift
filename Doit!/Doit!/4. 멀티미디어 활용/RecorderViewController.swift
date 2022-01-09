@@ -117,7 +117,7 @@ extension RecorderViewController {
         } else {
             soundRecorder.stop()
             recordBtn.setTitle("Record", for: .normal)
-            playBtn.isEnabled = false
+            //playBtn.isEnabled = false
             endTimeLbl.text = convertNSTimerIntervalToString(soundRecorder.currentTime)
         }
         
@@ -169,7 +169,10 @@ extension RecorderViewController {
         currentTimeLbl.text = "00:00"
         endTimeLbl.text = "00:00"
         endTimeLbl.textAlignment = .right
-        volumeSlider.value = 2.0
+        volumeSlider.value = 0.5 //🚨🚨🚨🚨 5.0으로 설정했을 때 왜 슬라이더 초기값 설정이 안되는지? 
+        //volumeSlider.setValue(6.0, animated: true)
+        volumeSlider.maximumValue = 1.0
+        progressBar.progress = 0.0
         
         [playBtn, stopBtn].forEach {
             $0.setTitleColor(.white, for: .normal)
@@ -177,8 +180,6 @@ extension RecorderViewController {
             $0.layer.cornerRadius = 10
         }
         
-        volumeSlider.maximumValue = 10.0
-        progressBar.progress = 0.0
         
     }
     final private func addTarget() {
@@ -208,7 +209,7 @@ extension RecorderViewController {
             mainLbl.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 40),
             mainLbl.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
             
-            progressBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 70),
+            progressBar.topAnchor.constraint(equalTo: mainLbl.bottomAnchor, constant: 20),
             progressBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
             progressBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
             
