@@ -43,6 +43,9 @@
 		0CEF299C2765CDA60093B45E /* SwipeGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF299B2765CDA60093B45E /* SwipeGestureViewController.swift */; };
 		0CEF299E2765CDB10093B45E /* PinchGestureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF299D2765CDB10093B45E /* PinchGestureViewController.swift */; };
 		0CEF29A52765FA160093B45E /* ImageMissionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29A42765FA160093B45E /* ImageMissionViewController.swift */; };
+		0CF47435278DACED0032AC96 /* Mountaineering.mov in Resources */ = {isa = PBXBuildFile; fileRef = 0CF47434278DACED0032AC96 /* Mountaineering.mov */; };
+		0CF47437278DACF40032AC96 /* Mountaineering.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0CF47436278DACF40032AC96 /* Mountaineering.jpg */; };
+		0CF4743A278DAD000032AC96 /* Fireworks.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0CF47439278DAD000032AC96 /* Fireworks.jpg */; };
 		0CF4DCA52785BC0E0045EECE /* Music2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF4DCA42785BC0E0045EECE /* Music2ViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +88,10 @@
 		0CEF299B2765CDA60093B45E /* SwipeGestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeGestureViewController.swift; sourceTree = "<group>"; };
 		0CEF299D2765CDB10093B45E /* PinchGestureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureViewController.swift; sourceTree = "<group>"; };
 		0CEF29A42765FA160093B45E /* ImageMissionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageMissionViewController.swift; sourceTree = "<group>"; };
+		0CF47434278DACED0032AC96 /* Mountaineering.mov */ = {isa = PBXFileReference; lastKnownFileType = video.quicktime; name = Mountaineering.mov; path = "../../../../../DoitSwift-예제파일/14장/Mountaineering.mov"; sourceTree = "<group>"; };
+		0CF47436278DACF40032AC96 /* Mountaineering.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Mountaineering.jpg; path = "../../../../../DoitSwift-예제파일/14장/Mountaineering.jpg"; sourceTree = "<group>"; };
+		0CF47438278DACFA0032AC96 /* FastTyping.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; name = FastTyping.mp4; path = "../../../../../DoitSwift-예제파일/14장/FastTyping.mp4"; sourceTree = "<group>"; };
+		0CF47439278DAD000032AC96 /* Fireworks.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = Fireworks.jpg; path = "../../../../../DoitSwift-예제파일/14장/Fireworks.jpg"; sourceTree = "<group>"; };
 		0CF4DCA42785BC0E0045EECE /* Music2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Music2ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -99,6 +106,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0CE80EE4278DAC7200513AD8 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				0CF47439278DAD000032AC96 /* Fireworks.jpg */,
+				0CF47438278DACFA0032AC96 /* FastTyping.mp4 */,
+				0CF47436278DACF40032AC96 /* Mountaineering.jpg */,
+				0CF47434278DACED0032AC96 /* Mountaineering.mov */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
 		0CEF29572765C4AD0093B45E = {
 			isa = PBXGroup;
 			children = (
@@ -187,6 +205,7 @@
 				0CF4DCA42785BC0E0045EECE /* Music2ViewController.swift */,
 				0C170F86277874940021C9C6 /* RecorderViewController.swift */,
 				0CEF29932765CD850093B45E /* VideoViewController.swift */,
+				0CE80EE4278DAC7200513AD8 /* resource */,
 				0CEF29952765CD8C0093B45E /* CameraViewController.swift */,
 				0CEF29972765CD950093B45E /* CoreGraphicsViewController.swift */,
 			);
@@ -264,7 +283,10 @@
 			files = (
 				0C171007277EF1D60021C9C6 /* pencil.png in Resources */,
 				0C171006277EF1D60021C9C6 /* cart.png in Resources */,
+				0CF47437278DACF40032AC96 /* Mountaineering.jpg in Resources */,
 				0C171005277EF1D60021C9C6 /* clock.png in Resources */,
+				0CF4743A278DAD000032AC96 /* Fireworks.jpg in Resources */,
+				0CF47435278DACED0032AC96 /* Mountaineering.mov in Resources */,
 				0C41AA022770C6C5005D7274 /* htmlView.html in Resources */,
 				0CEF29702765C4AE0093B45E /* LaunchScreen.storyboard in Resources */,
 				0CEF296D2765C4AE0093B45E /* Assets.xcassets in Resources */,
