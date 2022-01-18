@@ -17,6 +17,7 @@
 		0C171007277EF1D60021C9C6 /* pencil.png in Resources */ = {isa = PBXBuildFile; fileRef = 0C171004277EF1D60021C9C6 /* pencil.png */; };
 		0C41AA022770C6C5005D7274 /* htmlView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C41AA012770C6C5005D7274 /* htmlView.html */; };
 		0C41AA042772B86C005D7274 /* MissionPageControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */; };
+		0CE14AB52795B8FD00570627 /* SketchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE14AB42795B8FD00570627 /* SketchViewController.swift */; };
 		0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29632765C4AD0093B45E /* AppDelegate.swift */; };
 		0CEF29662765C4AD0093B45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29652765C4AD0093B45E /* SceneDelegate.swift */; };
 		0CEF29682765C4AD0093B45E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29672765C4AD0093B45E /* ViewController.swift */; };
@@ -60,6 +61,7 @@
 		0C171004277EF1D60021C9C6 /* pencil.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pencil.png; path = "../../../../DoitSwift-예제파일/12장/본문실습이미지/pencil.png"; sourceTree = "<group>"; };
 		0C41AA012770C6C5005D7274 /* htmlView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = htmlView.html; sourceTree = "<group>"; };
 		0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionPageControlViewController.swift; sourceTree = "<group>"; };
+		0CE14AB42795B8FD00570627 /* SketchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchViewController.swift; sourceTree = "<group>"; };
 		0CEF29602765C4AD0093B45E /* Doit!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doit!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEF29632765C4AD0093B45E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CEF29652765C4AD0093B45E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 			isa = PBXGroup;
 			children = (
 				0CEF29992765CD9E0093B45E /* TabTouchViewController.swift */,
+				0CE14AB42795B8FD00570627 /* SketchViewController.swift */,
 				0CEF299B2765CDA60093B45E /* SwipeGestureViewController.swift */,
 				0CEF299D2765CDB10093B45E /* PinchGestureViewController.swift */,
 			);
@@ -312,6 +315,7 @@
 				0CEF298A2765CD600093B45E /* PageControlViewController.swift in Sources */,
 				0CEF29922765CD790093B45E /* MusicViewController.swift in Sources */,
 				0CEF297A2765C8720093B45E /* ChapterViewController.swift in Sources */,
+				0CE14AB52795B8FD00570627 /* SketchViewController.swift in Sources */,
 				0CF4DCA52785BC0E0045EECE /* Music2ViewController.swift in Sources */,
 				0CEF29802765CD2A0093B45E /* DatePickerViewController.swift in Sources */,
 				0CEF299C2765CDA60093B45E /* SwipeGestureViewController.swift in Sources */,

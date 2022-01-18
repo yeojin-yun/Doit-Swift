@@ -227,7 +227,7 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
             case 0:
                 let nextVC = TabTouchViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
-                navigationController?.navigationBar.prefersLargeTitles = true
+                navigationController?.navigationBar.prefersLargeTitles = false
                 navigationController?.pushViewController(nextVC, animated: true)
             case 1:
                 let nextVC = SwipeGestureViewController()
