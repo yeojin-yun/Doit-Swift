@@ -34,7 +34,7 @@ extension CoreGraphicsViewController {
         // context생성 : 일종의 도화지
         let context = UIGraphicsGetCurrentContext()
         
-        //📍Drwa Line
+        //📍Draw Line
         // 선의 굵기
         context?.setLineWidth(2.0)
         // 선의 색상
@@ -48,7 +48,7 @@ extension CoreGraphicsViewController {
         context?.strokePath()
         
         
-        //📍Drwa Triangle
+        //📍Draw Triangle
         // 선의 굵기
         context?.setLineWidth(4.0)
         // 선의 색상
@@ -77,7 +77,7 @@ extension CoreGraphicsViewController {
         // context생성 : 일종의 도화지
         let context = UIGraphicsGetCurrentContext()
         
-        //📍Drwa Rectangle
+        //📍Draw Rectangle
         // 선의 굵기
         context?.setLineWidth(2.0)
         // 선의 색상
@@ -101,14 +101,14 @@ extension CoreGraphicsViewController {
         // context생성 : 일종의 도화지
         let context = UIGraphicsGetCurrentContext()
         
-        //📍Drwa Ellipse(타원)
+        //📍Draw Ellipse(타원)
         context?.setLineWidth(2.0)
         context?.setStrokeColor(UIColor.magenta.cgColor)
         context?.addEllipse(in: CGRect(x: 50, y: 50, width: 50, height: 200))
         context?.strokePath()
         
         
-        //📍Drwa Circle
+        //📍Draw Circle
         context?.setLineWidth(5.0)
         context?.setStrokeColor(UIColor.white.cgColor)
         context?.addEllipse(in: CGRect(x: 70, y: 200, width: 200, height: 200))
@@ -161,7 +161,7 @@ extension CoreGraphicsViewController {
         // context생성 : 일종의 도화지
         let context = UIGraphicsGetCurrentContext()
         
-        //📍Drwa Rectangle
+        //📍Fill Rectangle
         context?.setLineWidth(1.0)
         context?.setStrokeColor(UIColor.yellow.cgColor)
         context?.setFillColor(UIColor.yellow.cgColor)
@@ -172,7 +172,7 @@ extension CoreGraphicsViewController {
         context?.strokePath()
         
         
-        //📍Drwa Rectangle
+        //📍Fill Circle
         context?.setLineWidth(1.0)
         context?.setStrokeColor(UIColor.white.cgColor)
         context?.setFillColor(UIColor.white.cgColor)
@@ -182,7 +182,7 @@ extension CoreGraphicsViewController {
         context?.fillEllipse(in: circle)
         context?.strokePath()
         
-        //📍Drwa Triangle
+        //📍Fill Triangle
         context?.setLineWidth(1.0)
         context?.setStrokeColor(UIColor.red.cgColor)
         context?.setFillColor(UIColor.red.cgColor)

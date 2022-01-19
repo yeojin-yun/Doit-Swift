@@ -30,8 +30,8 @@ extension VideoViewController {
     // 내부 비디오 재생
     @objc func firstBtnTapped(_ sender: UIButton) {
         // 비디오가 저장된 내부의 파일 경로를 받아옴
-        let filePath = Bundle.main.path(forResource: "Mountaineering", ofType: "mov")
-        //let filePath = Bundle.main.path(forResource: "FastTyping", ofType: "mp4") //🚨안됨🚨
+        //let filePath = Bundle.main.path(forResource: "Mountaineering", ofType: "mov")
+        let filePath = Bundle.main.path(forResource: "FastTyping", ofType: "mp4") //🚨안됨🚨
         
         //앱 내부의 파일명을 URL 형태로 변경
         //if let url = URL(fileURLWithPath: filePath!)

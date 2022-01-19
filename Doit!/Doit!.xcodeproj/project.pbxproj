@@ -18,6 +18,7 @@
 		0C41AA022770C6C5005D7274 /* htmlView.html in Resources */ = {isa = PBXBuildFile; fileRef = 0C41AA012770C6C5005D7274 /* htmlView.html */; };
 		0C41AA042772B86C005D7274 /* MissionPageControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */; };
 		0CE14AB52795B8FD00570627 /* SketchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE14AB42795B8FD00570627 /* SketchViewController.swift */; };
+		0CE14B1A27982DEC00570627 /* FastTyping.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0CF47438278DACFA0032AC96 /* FastTyping.mp4 */; };
 		0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29632765C4AD0093B45E /* AppDelegate.swift */; };
 		0CEF29662765C4AD0093B45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29652765C4AD0093B45E /* SceneDelegate.swift */; };
 		0CEF29682765C4AD0093B45E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29672765C4AD0093B45E /* ViewController.swift */; };
@@ -284,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CE14B1A27982DEC00570627 /* FastTyping.mp4 in Resources */,
 				0C171007277EF1D60021C9C6 /* pencil.png in Resources */,
 				0C171006277EF1D60021C9C6 /* cart.png in Resources */,
 				0CF47437278DACF40032AC96 /* Mountaineering.jpg in Resources */,
