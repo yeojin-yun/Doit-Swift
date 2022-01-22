@@ -14,6 +14,12 @@ class SwipeGestureViewController: UIViewController {
     let rightImg = UIImageView()
     let bottomImg = UIImageView()
     
+    var imgLeft = [UIImage]()
+    var imgRight = [UIImage]()
+    var imgTop = [UIImage]()
+    var imgBottom = [UIImage]()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -30,13 +36,25 @@ extension SwipeGestureViewController {
         setAttributes()
         addTarget()
         setConstraints()
+        addArray()
+    }
+    func addArray() {
+        imgLeft.append(UIImage(systemName: "arrow.left.square")!)
+        imgLeft.append(UIImage(systemName: "arrow.left.square.fill")!)
+        imgRight.append(UIImage(systemName: "arrow.right.square")!)
+        imgRight.append(UIImage(systemName: "arrow.right.square.fill")!)
+        imgTop.append(UIImage(systemName: "arrow.up.square")!)
+        imgTop.append(UIImage(systemName: "arrow.up.square.fill")!)
+        imgBottom.append(UIImage(systemName: "arrow.down.square")!)
+        imgBottom.append(UIImage(systemName: "arrow.down.square.fill")!)
+        
     }
     
     final private func setAttributes() {
-        leftImg.image = UIImage(systemName: "arrow.left.square")
-        rightImg.image = UIImage(systemName: "arrow.right.square")
-        topImg.image = UIImage(systemName: "arrow.up.square")
-        bottomImg.image = UIImage(systemName: "arrow.down.square")
+        leftImg.image = imgLeft[0]
+        rightImg.image = imgRight[0]
+        topImg.image = imgTop[0]
+        bottomImg.image = imgBottom[0]
     }
     
     final private func addTarget() {
@@ -54,25 +72,25 @@ extension SwipeGestureViewController {
         horizontalStack.distribution = .fillEqually
         horizontalStack.spacing = 100
         
-        [verticalStack, horizontalStack, leftImg].forEach {
+        [verticalStack, horizontalStack].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         NSLayoutConstraint.activate([
-            verticalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-//            verticalStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            verticalStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            leftImg.heightAnchor.constraint(equalToConstant: 300),
-            leftImg.widthAnchor.constraint(equalToConstant: 300),
+            verticalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -160),
             verticalStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            
-            horizontalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -100),
-//            horizontalStack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-//            horizontalStack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            horizontalStack.heightAnchor.constraint(equalToConstant: 300),
-            horizontalStack.widthAnchor.constraint(equalToConstant: 300),
-            horizontalStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
+            leftImg.heightAnchor.constraint(equalToConstant: 100),
+            leftImg.widthAnchor.constraint(equalToConstant: 100),
+            rightImg.heightAnchor.constraint(equalTo: leftImg.heightAnchor),
+            rightImg.widthAnchor.constraint(equalTo: leftImg.widthAnchor),
+
+            horizontalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
+            horizontalStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+            topImg.heightAnchor.constraint(equalToConstant: 100),
+            topImg.widthAnchor.constraint(equalToConstant: 100),
+            bottomImg.heightAnchor.constraint(equalTo: topImg.heightAnchor),
+            bottomImg.widthAnchor.constraint(equalTo: topImg.widthAnchor)
         ])
     }
 }
