@@ -10,51 +10,95 @@ import UIKit
 class SwipeGestureViewController: UIViewController {
 
     let leftImg = UIImageView()
-    let topImg = UIImageView()
+    let upImg = UIImageView()
     let rightImg = UIImageView()
-    let bottomImg = UIImageView()
+    let downImg = UIImageView()
     
     var imgLeft = [UIImage]()
     var imgRight = [UIImage]()
-    var imgTop = [UIImage]()
-    var imgBottom = [UIImage]()
+    var imgUp = [UIImage]()
+    var imgDown = [UIImage]()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-        // Do any additional setup after loading the view.
+        setUpGesture()
+        print(imgLeft[0])
+    }
+}
+
+//MARK: -Swipe Gesture
+extension SwipeGestureViewController{
+    func setUpGesture() {
+        let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGesture(_:)))
+        swipeUp.direction = UISwipeGestureRecognizer.Direction.up
+        self.view.addGestureRecognizer(swipeUp)
+        
+        
+        let swipeDown = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGesture(_:)))
+        swipeDown.direction = UISwipeGestureRecognizer.Direction.down
+        self.view.addGestureRecognizer(swipeDown)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        self.view.addGestureRecognizer(swipeLeft)
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        self.view.addGestureRecognizer(swipeRight)
+        
     }
     
-
+    @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            leftImg.image = imgLeft[0]
+            rightImg.image = imgRight[0]
+            upImg.image = imgUp[0]
+            downImg.image = imgDown[0]
+            
+            switch swipeGesture.direction {
+            case .up:
+                upImg.image = imgUp[1]
+            case .down:
+                downImg.image = imgDown[1]
+            case .left:
+                leftImg.image = imgLeft[1]
+            case .right:
+                rightImg.image = imgRight[1]
+            default:
+                break
+            }
+        }
+    }
 }
 
 //MARK: -UI
 extension SwipeGestureViewController {
     final private func configureUI() {
+        addArray()
         setAttributes()
         addTarget()
         setConstraints()
-        addArray()
     }
     func addArray() {
         imgLeft.append(UIImage(systemName: "arrow.left.square")!)
         imgLeft.append(UIImage(systemName: "arrow.left.square.fill")!)
         imgRight.append(UIImage(systemName: "arrow.right.square")!)
         imgRight.append(UIImage(systemName: "arrow.right.square.fill")!)
-        imgTop.append(UIImage(systemName: "arrow.up.square")!)
-        imgTop.append(UIImage(systemName: "arrow.up.square.fill")!)
-        imgBottom.append(UIImage(systemName: "arrow.down.square")!)
-        imgBottom.append(UIImage(systemName: "arrow.down.square.fill")!)
+        imgUp.append(UIImage(systemName: "arrow.up.square")!)
+        imgUp.append(UIImage(systemName: "arrow.up.square.fill")!)
+        imgDown.append(UIImage(systemName: "arrow.down.square")!)
+        imgDown.append(UIImage(systemName: "arrow.down.square.fill")!)
         
     }
     
     final private func setAttributes() {
         leftImg.image = imgLeft[0]
         rightImg.image = imgRight[0]
-        topImg.image = imgTop[0]
-        bottomImg.image = imgBottom[0]
+        upImg.image = imgUp[0]
+        downImg.image = imgDown[0]
     }
     
     final private func addTarget() {
@@ -62,7 +106,7 @@ extension SwipeGestureViewController {
     }
     
     final private func setConstraints() {
-        let verticalStack = UIStackView(arrangedSubviews: [topImg, bottomImg])
+        let verticalStack = UIStackView(arrangedSubviews: [upImg, downImg])
         verticalStack.axis = .vertical
         verticalStack.distribution = .fillEqually
         verticalStack.spacing = 100
@@ -87,10 +131,10 @@ extension SwipeGestureViewController {
 
             horizontalStack.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -250),
             horizontalStack.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
-            topImg.heightAnchor.constraint(equalToConstant: 100),
-            topImg.widthAnchor.constraint(equalToConstant: 100),
-            bottomImg.heightAnchor.constraint(equalTo: topImg.heightAnchor),
-            bottomImg.widthAnchor.constraint(equalTo: topImg.widthAnchor)
+            upImg.heightAnchor.constraint(equalToConstant: 100),
+            upImg.widthAnchor.constraint(equalToConstant: 100),
+            downImg.heightAnchor.constraint(equalTo: upImg.heightAnchor),
+            downImg.widthAnchor.constraint(equalTo: upImg.widthAnchor)
         ])
     }
 }
