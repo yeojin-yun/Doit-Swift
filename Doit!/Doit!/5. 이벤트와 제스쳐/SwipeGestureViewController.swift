@@ -19,18 +19,21 @@ class SwipeGestureViewController: UIViewController {
     var imgUp = [UIImage]()
     var imgDown = [UIImage]()
     
+    let numberOfTouchs = 2
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
         setUpGesture()
-        print(imgLeft[0])
+        multiSwipeGesture()
+        
     }
 }
 
 //MARK: -Swipe Gesture
 extension SwipeGestureViewController{
+    // 한 손가락 제스쳐 등록
     func setUpGesture() {
         let swipeUp = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGesture(_:)))
         swipeUp.direction = UISwipeGestureRecognizer.Direction.up
@@ -51,6 +54,32 @@ extension SwipeGestureViewController{
         
     }
     
+    // 두 손가락 제스쳐 등록
+    func multiSwipeGesture() {
+        let swipeUpMulti = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGestureMulti(_:)))
+        swipeUpMulti.direction = UISwipeGestureRecognizer.Direction.up
+        // 두 손가락 스와이프 설정
+        swipeUpMulti.numberOfTouchesRequired = numberOfTouchs
+        self.view.addGestureRecognizer(swipeUpMulti)
+        
+        
+        let swipeDownMulti = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGestureMulti(_:)))
+        swipeDownMulti.direction = UISwipeGestureRecognizer.Direction.down
+        swipeDownMulti.numberOfTouchesRequired = numberOfTouchs
+        self.view.addGestureRecognizer(swipeDownMulti)
+        
+        let swipeLeftMulti = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGestureMulti(_:)))
+        swipeLeftMulti.direction = UISwipeGestureRecognizer.Direction.left
+        swipeLeftMulti.numberOfTouchesRequired = numberOfTouchs
+        self.view.addGestureRecognizer(swipeLeftMulti)
+        
+        let swipeRightMulti = UISwipeGestureRecognizer(target: self, action: #selector(SwipeGestureViewController.respondToSwipeGestureMulti(_:)))
+        swipeRightMulti.direction = UISwipeGestureRecognizer.Direction.right
+        swipeRightMulti.numberOfTouchesRequired = numberOfTouchs
+        self.view.addGestureRecognizer(swipeRightMulti)
+    }
+    
+    //한 손가락 스와이프 시, 실행될 액션 메서드
     @objc func respondToSwipeGesture(_ gesture: UIGestureRecognizer) {
         if let swipeGesture = gesture as? UISwipeGestureRecognizer {
             leftImg.image = imgLeft[0]
@@ -72,6 +101,29 @@ extension SwipeGestureViewController{
             }
         }
     }
+    
+    //두 손가락 스와이프 시, 실행될 액션 메서드
+    @objc func respondToSwipeGestureMulti(_ gesture: UIGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            leftImg.image = imgLeft[0]
+            rightImg.image = imgRight[0]
+            upImg.image = imgUp[0]
+            downImg.image = imgDown[0]
+            
+            switch swipeGesture.direction {
+            case .up:
+                upImg.image = imgUp[2]
+            case .down:
+                downImg.image = imgDown[2]
+            case .left:
+                leftImg.image = imgLeft[2]
+            case .right:
+                rightImg.image = imgRight[2]
+            default:
+                break
+            }
+        }
+    }
 }
 
 //MARK: -UI
@@ -79,7 +131,6 @@ extension SwipeGestureViewController {
     final private func configureUI() {
         addArray()
         setAttributes()
-        addTarget()
         setConstraints()
     }
     func addArray() {
@@ -91,7 +142,10 @@ extension SwipeGestureViewController {
         imgUp.append(UIImage(systemName: "arrow.up.square.fill")!)
         imgDown.append(UIImage(systemName: "arrow.down.square")!)
         imgDown.append(UIImage(systemName: "arrow.down.square.fill")!)
-        
+        imgLeft.append(UIImage(systemName: "arrow.left.circle.fill")!)
+        imgRight.append(UIImage(systemName: "arrow.right.circle.fill")!)
+        imgUp.append(UIImage(systemName: "arrow.up.circle.fill")!)
+        imgDown.append(UIImage(systemName: "arrow.down.circle.fill")!)
     }
     
     final private func setAttributes() {
@@ -100,10 +154,7 @@ extension SwipeGestureViewController {
         upImg.image = imgUp[0]
         downImg.image = imgDown[0]
     }
-    
-    final private func addTarget() {
-        
-    }
+
     
     final private func setConstraints() {
         let verticalStack = UIStackView(arrangedSubviews: [upImg, downImg])
