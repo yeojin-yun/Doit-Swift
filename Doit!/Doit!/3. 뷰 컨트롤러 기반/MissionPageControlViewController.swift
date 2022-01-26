@@ -11,6 +11,7 @@ class MissionPageControlViewController: UIViewController {
 
     let myView = UIView()
     let label = UILabel()
+    var initialFontSize: CGFloat!
     let pageControl = UIPageControl()
     let colors: [UIColor] = [UIColor.red, UIColor.orange, UIColor.yellow, UIColor.green, UIColor.blue, UIColor.brown, UIColor.purple]
     
@@ -18,8 +19,61 @@ class MissionPageControlViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
+        setUpSwipe()
+        setUpPinch()
     }
 }
+
+//MARK: -PinceGesture
+
+extension MissionPageControlViewController{
+    func setUpPinch() {
+        let pinch = UIPinchGestureRecognizer(target: self, action: #selector(respondPinchGesture(_:)))
+        view.addGestureRecognizer(pinch)
+    }
+    
+    @objc func respondPinchGesture(_ pinch: UIPinchGestureRecognizer) {
+        if pinch.state == UIPinchGestureRecognizer.State.began {
+            initialFontSize = label.font.pointSize
+        } else {
+            // pinch제스쳐의 상태가 "시작"이 아니라면, 핀치제스쳐가 계속 진행되고 있는 상태이므로, initialFontSize에 저장해 둔 글자 크기 값에 scale 속성을 곱하여 텍스트의 글자 크기에 반영
+            label.font = label.font.withSize(initialFontSize * pinch.scale)
+        }
+    }
+    
+}
+//MARK: -SwipeGesture
+extension MissionPageControlViewController {
+    func setUpSwipe() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondSwipeGesture(_:)))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+        view.addGestureRecognizer(swipeRight)
+        
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(respondSwipeGesture(_:)))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+        view.addGestureRecognizer(swipeLeft)
+        
+    }
+    
+    @objc func respondSwipeGesture(_ gesture: UISwipeGestureRecognizer) {
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case .left:
+                if pageControl.currentPage < pageControl.numberOfPages {
+                    pageControl.currentPage = pageControl.currentPage + 1
+                }
+            case .right:
+                if pageControl.currentPage > 0 {
+                    pageControl.currentPage = pageControl.currentPage - 1
+                }
+            default:
+                break
+            }
+            myView.backgroundColor = colors[pageControl.currentPage]
+        }
+    }
+}
+
 
 //MARK: -Event
 extension MissionPageControlViewController {

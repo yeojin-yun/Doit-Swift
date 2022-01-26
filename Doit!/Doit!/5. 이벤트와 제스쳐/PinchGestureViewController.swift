@@ -8,7 +8,7 @@
 import UIKit
 
 class PinchGestureViewController: UIViewController {
-
+    
     let pinchLabel = UILabel()
     
     var initialFontSize: CGFloat!
@@ -17,12 +17,21 @@ class PinchGestureViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         configureUI()
-        setUPGesture()
+        setUPGesture() // 핀치 제스처 등록하기
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "이미지", style: .plain, target: self, action: #selector(rightBarBtnTapped(_:)))
     }
     
-
-
+    
+    
 }
+extension PinchGestureViewController {
+    @objc func rightBarBtnTapped(_ sender: UIButton) {
+        let nextVC = PinchGestureImgViewController()
+        self.navigationController?.pushViewController(nextVC, animated: true)
+        
+    }
+}
+
 
 extension PinchGestureViewController {
     func setUPGesture() {
@@ -30,16 +39,21 @@ extension PinchGestureViewController {
         self.view.addGestureRecognizer(pinch)
     }
     
+    // 핀치 제스처 액션
     @objc func doPinch(_ pinch: UIPinchGestureRecognizer) {
         // pince 제스처의 상태 확인
         if (pinch.state == UIGestureRecognizer.State.began) {
             // pinch제스쳐의 상태가 "시작"이면 앞에서 선언한 initialFontSize 변수에 현재 텍스트의 글자 크기 저장
             initialFontSize = pinchLabel.font.pointSize
+            print("size: \(initialFontSize)")
         } else {
-            // pinch제스쳐의 상태가 "시작" 아니라면, 핀치제스쳐가 계속 진행되고 있는 상태이므로, initialFontSize에 저장해 둔 글자 크기 값에 scale 속성을 곱하여 텍스트의 글자 크기에 반영
+            // pinch제스쳐의 상태가 "시작"이 아니라면, 핀치제스쳐가 계속 진행되고 있는 상태이므로, initialFontSize에 저장해 둔 글자 크기 값에 scale 속성을 곱하여 텍스트의 글자 크기에 반영
             pinchLabel.font = pinchLabel.font.withSize(initialFontSize * pinch.scale)
+            print(pinchLabel.font.pointSize)
         }
     }
+    
+    
 }
 
 //MARK: -UI

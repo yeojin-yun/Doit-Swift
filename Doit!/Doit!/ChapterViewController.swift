@@ -237,7 +237,7 @@ extension ChapterViewController: UITableViewDelegate, UITableViewDataSource {
             case 2:
                 let nextVC = PinchGestureViewController()
                 nextVC.navigationItem.title = selectedList[indexPath.row]
-                navigationController?.navigationBar.prefersLargeTitles = true
+                navigationController?.navigationBar.prefersLargeTitles = false
                 navigationController?.pushViewController(nextVC, animated: true)
             default:
                 break

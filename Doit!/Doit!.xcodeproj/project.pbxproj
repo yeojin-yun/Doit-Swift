@@ -19,6 +19,7 @@
 		0C41AA042772B86C005D7274 /* MissionPageControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */; };
 		0CE14AB52795B8FD00570627 /* SketchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE14AB42795B8FD00570627 /* SketchViewController.swift */; };
 		0CE14B1A27982DEC00570627 /* FastTyping.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 0CF47438278DACFA0032AC96 /* FastTyping.mp4 */; };
+		0CE14B8827A12D3B00570627 /* PinchGestureImgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE14B8727A12D3B00570627 /* PinchGestureImgViewController.swift */; };
 		0CEF29642765C4AD0093B45E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29632765C4AD0093B45E /* AppDelegate.swift */; };
 		0CEF29662765C4AD0093B45E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29652765C4AD0093B45E /* SceneDelegate.swift */; };
 		0CEF29682765C4AD0093B45E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEF29672765C4AD0093B45E /* ViewController.swift */; };
@@ -63,6 +64,7 @@
 		0C41AA012770C6C5005D7274 /* htmlView.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; path = htmlView.html; sourceTree = "<group>"; };
 		0C41AA032772B86C005D7274 /* MissionPageControlViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionPageControlViewController.swift; sourceTree = "<group>"; };
 		0CE14AB42795B8FD00570627 /* SketchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SketchViewController.swift; sourceTree = "<group>"; };
+		0CE14B8727A12D3B00570627 /* PinchGestureImgViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinchGestureImgViewController.swift; sourceTree = "<group>"; };
 		0CEF29602765C4AD0093B45E /* Doit!.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Doit!.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CEF29632765C4AD0093B45E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0CEF29652765C4AD0093B45E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				0CE14AB42795B8FD00570627 /* SketchViewController.swift */,
 				0CEF299B2765CDA60093B45E /* SwipeGestureViewController.swift */,
 				0CEF299D2765CDB10093B45E /* PinchGestureViewController.swift */,
+				0CE14B8727A12D3B00570627 /* PinchGestureImgViewController.swift */,
 			);
 			name = "5. 이벤트와 제스쳐";
 			path = "5. 이벤트와 제스쳐";
@@ -322,6 +325,7 @@
 				0CEF29802765CD2A0093B45E /* DatePickerViewController.swift in Sources */,
 				0CEF299C2765CDA60093B45E /* SwipeGestureViewController.swift in Sources */,
 				0CEF29842765CD3C0093B45E /* AlertViewController.swift in Sources */,
+				0CE14B8827A12D3B00570627 /* PinchGestureImgViewController.swift in Sources */,
 				0CEF29942765CD850093B45E /* VideoViewController.swift in Sources */,
 				0C170F87277874940021C9C6 /* RecorderViewController.swift in Sources */,
 				0CEF29882765CD530093B45E /* MapViewViewController.swift in Sources */,
